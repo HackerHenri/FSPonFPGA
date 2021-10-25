@@ -43,7 +43,7 @@ for n=1:length(x_test)
         test_zwsp = test_zwsp + b_k_test(k)*x_zwsp(k);
 
     end
-    x_tilde_test(n)=round(test_zwsp/(2^15));
+    x_tilde_test(n)=test_zwsp/(2^15);
 % delay line
     x_delayed_zwsp(n) = x_test(n);
     if n > G
@@ -59,21 +59,21 @@ for n=1:length(x_test)
 end
 %% Output
 %round y
-y=y./(2^15);
+y=fi(y./(2^15-1),1,16,15);
 % plot(x_delayed_test);
 % hold;
 % plot(x_test);
 % plot(x_ssb*(2^15-1));
 % Power Spectrum
 figure;
-periodogram(y, [], 4096, fs, 'power', 'centered');
+periodogram(y.data, [], 4096, fs, 'power', 'centered');
 title('Periodogramm des modulierten Signals (mit Cosinus-Array)');
 ylim([-75 0]);
 xlim([-3 3]);
 
 % Spectrogramm
 figure;
-spectrogram(y, hamming(512), [], [], fs, 'yaxis'); 
+spectrogram(y.data, hamming(512), [], [], fs, 'yaxis'); 
 title('Spektrogramm des modulierten Signals (mit Cosinus-Array)');
 ax = gca;
 ax.YLim = [0 3];
