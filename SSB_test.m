@@ -2,14 +2,17 @@
 
 %% Test Signal
 fs = 48e3; % Abtastfrequenz in Hz
-fc = 1000; % carrier frequency in Hz
+fc = 1500; % carrier frequency in Hz
 
-t = 0:1/fs:.1-1/fs;
-% x_test = fi(chirp(t,100,.1-1/fs,1000),1,16,15);  %input signal
-x_test = round((2^15-1)*chirp(t,100,.1-1/fs,1000));  %input signal
+%t = 0:1/fs:.1-1/fs;
+t = 0:1/fs:.8008-1/fs;
+
+%x_test = fi(chirp(t,100,.1-1/fs,1000),1,16,15);  %input signal
+%x_test = round((2^15-1)*chirp(t,100,.1-1/fs,1000));  %input signal
+x_test = round((2^15-1)*input);
 % LUTs for sine and cosine
-LUT_cos=round((2^15-1)*cos(2*pi*(fc/fs)*(0:48-1)));
-LUT_sin=round((2^15-1)*sin(2*pi*(fc/fs)*(0:48-1)));
+LUT_cos=round((2^15-1)*cos(2*pi*(fc/fs)*(0:32-1)));
+LUT_sin=round((2^15-1)*sin(2*pi*(fc/fs)*(0:32-1)));
 
 %% Filter-Design of Hilbert filter
 N = 128; % filter order
@@ -53,13 +56,13 @@ for n=1:length(x_test)
     y(n) = x_delayed_test(n)*LUT_cos(index_LUT) - x_tilde_test(n)*LUT_sin(index_LUT);
 % calculate index for LUT
     index_LUT = index_LUT+1;
-    if index_LUT > 48
+    if index_LUT > 32
         index_LUT = 1;
     end
 end
 %% Output
 %round y
-y=y./(2^15);
+y=y./(2^29);
 % plot(x_delayed_test);
 % hold;
 % plot(x_test);
