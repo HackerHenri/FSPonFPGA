@@ -2,17 +2,19 @@
 
 %% Test Signal
 fs = 48e3; % Abtastfrequenz in Hz
-fc = 1500; % carrier frequency in Hz
+fc = 1000; % carrier frequency in Hz
 
-%t = 0:1/fs:.1-1/fs;
-t = 0:1/fs:.8008-1/fs;
+t = 0:1/fs:.1-1/fs; % chirp
+%t = 0:1/fs:.8008-1/fs; % maybe next time
+%t = 0:1/fs:4.5938-1/fs; % longer signal
 
 %x_test = fi(chirp(t,100,.1-1/fs,1000),1,16,15);  %input signal
-%x_test = round((2^15-1)*chirp(t,100,.1-1/fs,1000));  %input signal
-x_test = round((2^15-1)*input);
+x_test = round((2^15-1)*chirp(t,100,.1-1/fs,1000));  %input signal
+%x_test = round((2^15-1)*input_example); %longer example from emil
+%x_test = round((2^15-1)*input); %maybe next time
 % LUTs for sine and cosine
-LUT_cos=round((2^15-1)*cos(2*pi*(fc/fs)*(0:32-1)));
-LUT_sin=round((2^15-1)*sin(2*pi*(fc/fs)*(0:32-1)));
+LUT_cos=round((2^7-1)*cos(2*pi*(fc/fs)*(0:48-1)));
+LUT_sin=round((2^7-1)*sin(2*pi*(fc/fs)*(0:48-1)));
 
 %% Filter-Design of Hilbert filter
 N = 128; % filter order
@@ -43,10 +45,12 @@ for n=1:length(x_test)
 % calculate filtered values with difference equation
     test_zwsp=0;
     for k=1:length(x_zwsp)
-        test_zwsp = test_zwsp + b_k_test(k)*x_zwsp(k);
-
+        temp=b_k_test(k)*x_zwsp(k);
+        
+        test_zwsp = test_zwsp + round(temp/2^15);
+        %test_zwsp = round(test_zwsp/2^8);
     end
-    x_tilde_test(n)=round(test_zwsp/(2^15));
+    x_tilde_test(n)=test_zwsp;
 % delay line
     x_delayed_zwsp(n) = x_test(n);
     if n > G
@@ -56,14 +60,14 @@ for n=1:length(x_test)
     y(n) = x_delayed_test(n)*LUT_cos(index_LUT) - x_tilde_test(n)*LUT_sin(index_LUT);
 % calculate index for LUT
     index_LUT = index_LUT+1;
-    if index_LUT > 32
+    if index_LUT > 48
         index_LUT = 1;
     end
 end
 %% Output
 %round y
 y=round(y);
-y=y./(2^29);
+y=y./(2^23);
 % plot(x_delayed_test);
 % hold;
 % plot(x_test);
