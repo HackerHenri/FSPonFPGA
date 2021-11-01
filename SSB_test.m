@@ -62,6 +62,7 @@ for n=1:length(x_test)
 end
 %% Output
 %round y
+y=round(y);
 y=y./(2^29);
 % plot(x_delayed_test);
 % hold;
