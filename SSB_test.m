@@ -4,8 +4,8 @@
 fs = 48e3; % Abtastfrequenz in Hz
 fc = 1000; % carrier frequency in Hz
 
-t = 0:1/fs:.1-1/fs; % chirp
-%t = 0:1/fs:.8008-1/fs; % maybe next time
+% t = 0:1/fs:.1-1/fs; % chirp
+t = 0:1/fs:.8008-1/fs; % maybe next time
 %t = 0:1/fs:4.5938-1/fs; % longer signal
 
 input = audioread("maybe-next-time.wav");
@@ -76,7 +76,7 @@ figure;
 periodogram(y, [], 4096, fs, 'power', 'centered');
 title('Periodogramm des modulierten Signals (mit Cosinus-Array)');
 ylim([-200 0]);
-xlim([-10 10]);
+xlim([-6 6]);
 
 % Spectrogramm
 figure;
