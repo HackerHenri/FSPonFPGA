@@ -37,6 +37,12 @@ x_delayed_zwsp = zeros(1,length(x_test)-G);
 x_delayed_test = zeros(1,length(x_test));
 y=zeros(1,length(x_test));
 index_LUT = uint8(1);
+
+% Add to record values inside loop for ADD_MULT
+x_tilde_mid=zeros(1,length(x_test));
+x_delayed_mid = zeros(1,length(x_test));
+y_mid=zeros(1,length(x_test));
+counter_mid=zeros(1,length(x_test));
 %% For loop simulation of sample by sample
 for n=1:length(x_test)   
 % shift register for Filter
@@ -59,7 +65,13 @@ for n=1:length(x_test)
         x_delayed_test(n) = x_delayed_zwsp(n-G);   
     end
 % multiply with sine/cosine and add signals 
+    x_delayed_mid(n) = x_delayed_test(n); % Add to record values inside loop for ADD_MULT
+    x_tilde_mid(n) = x_tilde_test(n); % Add to record values inside loop for ADD_MULT
+
     y(n) = x_delayed_test(n)*LUT_cos(index_LUT) - x_tilde_test(n)*LUT_sin(index_LUT);
+
+    y_mid(n) = y(n); % Add to record values inside loop for ADD_MULT
+    counter_mid(n) = index_LUT; % Add to record values inside loop for ADD_MULT
 % calculate index for LUT
     index_LUT = index_LUT+1;
     if index_LUT > 48
