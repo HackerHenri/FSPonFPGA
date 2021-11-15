@@ -17,7 +17,7 @@ entity ADD_MULT is
         delayed_line: in signed;
         out_line: out signed;
         clock: in std_logic;
-        reset: in std_logic;
+        reset: in std_logic
         );
 end entity;
     
