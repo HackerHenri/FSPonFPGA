@@ -11,7 +11,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity ADD_MULT is
-    generic(data_width: natural := 16); 
+    generic(data_width: natural := 16);
     port(
         filtered_line: in signed;
         delayed_line: in signed;
