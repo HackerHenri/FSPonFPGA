@@ -20,17 +20,17 @@ architecture STIMULI of ADD_MULT_TB is
     end component;
 
     -- Signals for DUT connections
-    signal	filtered_line_dut: signed range 2**data_width-1 to -(2**data_width) := 0;
-    signal	delayed_line_dut: signed range 2**data_width-1 to -(2**data_width) := 0;
-    signal  out_line_dut: signed range 2**data_width-1 to -(2**data_width) := 0;
-    signal  clock_dut: std_logic := 0;
-    signal  reset_dut: std_logic := 0;
+    signal	filtered_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
+    signal	delayed_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
+    signal  out_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
+    signal  clock_dut: std_logic := '0';
+    signal  reset_dut: std_logic := '0';
 
     -- Constant clock signal
     constant clock_period: time := 10 ns;
 
     -- Array for test input and output values
-    type test_array is array (natural range<>, natural range<>) of signed  2**data_width-1 to -(2**data_width);
+    type test_array is array (natural range<>, natural range<>) of integer 2**data_width-1 to -(2**data_width);
     constant test_register: test_array := (
         -- Matches values from matlab arrays 'x_tilde_mid', 'x_delayed_mid', 'y_mid'
         (    29,   -14, -1778), -- Matlab idx = 1201, LUT counter = 0
@@ -63,8 +63,8 @@ architecture STIMULI of ADD_MULT_TB is
                     reset_dut <= '1';
                     wait for clock_period
                     reset_dut <= '0';
-                    filtered_line_dut <= test_register(I, 0);
-                    delayed_line_dut <= test_register(I, 1);
+                    filtered_line_dut <= to_signed(test_register(I, 0));
+                    delayed_line_dut <= to_signed(test_register(I, 1));
                 end loop;
                 wait for clock_period;
             end loop;
