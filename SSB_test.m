@@ -1,7 +1,7 @@
 %% Single-Sideband-Modulation
 
 %% Test Signal
-fs = 48e3; % Abtastfrequenz in Hz
+fs = 96e3; % Abtastfrequenz in Hz
 fc = 1000; % carrier frequency in Hz
 
 % t = 0:1/fs:.1-1/fs; % chirp
@@ -15,8 +15,8 @@ x_test = round((2^15-1)*input); %maybe next time
 %x_test = round((2^15-1)*input_example); %longer example from emil
 
 % LUTs for sine and cosine
-LUT_cos=round((2^7-1)*cos(2*pi*(fc/fs)*(0:48-1)));
-LUT_sin=round((2^7-1)*sin(2*pi*(fc/fs)*(0:48-1)));
+LUT_cos=round((2^7-1)*cos(2*pi*(fc/fs)*(0:96-1)));
+LUT_sin=round((2^7-1)*sin(2*pi*(fc/fs)*(0:96-1)));
 
 %% Filter-Design of Hilbert filter
 N = 128; % filter order
