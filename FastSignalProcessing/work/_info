@@ -1,0 +1,353 @@
+m255
+K4
+z2
+Z0 !s99 nomlopt
+R0
+R0
+R0
+R0
+R0
+R0
+R0
+!s11e vcom 2021.2 2021.04, Apr 14 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/modeltech64_2021.2/examples
+T_opt
+!s110 1637592354
+VmA1`MD?ah716nQ6Z8NBDW2
+04 19 10 work audio_system_top_tb behavioral 1
+=1-3cecef77e57c-619bad21-2bf-6b4c
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work
+tCvgOpt 0
+n@_opt
+OL;O;2021.2;73
+Eadd_mult
+Z1 w1637592325
+Z2 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 137
+Z5 dL:/FastSignalProcessing
+Z6 8L:/FastSignalProcessing/Modulator.vhd
+Z7 FL:/FastSignalProcessing/Modulator.vhd
+l0
+L13 1
+VV;D9VN?gdVz][5[oRc7lZ1
+!s100 iFalPIA;5?m5HXKJRM8GH2
+Z8 OL;C;2021.2;73
+32
+Z9 !s110 1637592346
+!i10b 1
+Z10 !s108 1637592346.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|L:/FastSignalProcessing/Modulator.vhd|
+Z12 !s107 L:/FastSignalProcessing/Modulator.vhd|
+!i113 0
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1 CvgOpt 0
+Adouble_lut
+R2
+R3
+R4
+DEx4 work 8 add_mult 0 22 V;D9VN?gdVz][5[oRc7lZ1
+!i122 137
+l67
+L28 65
+VcHf93?SLaoz`9VcLSZRUX3
+!s100 FGOP14a87CXhQKQZNIXZC2
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 0
+R13
+R14
+Eaudio_codec_com
+Z15 w1636983653
+R2
+R3
+R4
+!i122 131
+R5
+Z16 8L:/FastSignalProcessing/AUDIO_CODEC_COM.vhd
+Z17 FL:/FastSignalProcessing/AUDIO_CODEC_COM.vhd
+l0
+Z18 L10 1
+VPM@YQYJ3dUcRW;ka>cJFF1
+!s100 @h>CcRBZcGOc3icfXn@@00
+R8
+32
+Z19 !s110 1637592345
+!i10b 1
+Z20 !s108 1637592345.000000
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|L:/FastSignalProcessing/AUDIO_CODEC_COM.vhd|
+Z22 !s107 L:/FastSignalProcessing/AUDIO_CODEC_COM.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+DEx4 work 15 audio_codec_com 0 22 PM@YQYJ3dUcRW;ka>cJFF1
+!i122 131
+l40
+L30 113
+VUndf=MLWKAJ:7RhgFc<8F3
+!s100 ^98:0^fAZ4DWnCeCbHncj0
+R8
+32
+R19
+!i10b 1
+R20
+R21
+R22
+!i113 0
+R13
+R14
+Eaudio_processing
+Z23 w1637591716
+R2
+R3
+R4
+!i122 132
+R5
+Z24 8L:/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd
+Z25 FL:/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd
+l0
+R18
+V3=T]UPVg^9_XO@87MCM022
+!s100 n:0X:N==li57_F3e8cZ2I3
+R8
+32
+R19
+!i10b 1
+R20
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|L:/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd|
+Z27 !s107 L:/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd|
+!i113 0
+R13
+R14
+Acomponents
+R2
+R3
+R4
+DEx4 work 16 audio_processing 0 22 3=T]UPVg^9_XO@87MCM022
+!i122 132
+l63
+L21 53
+VfMFaiNh9nnDUI@BL3iiY?0
+!s100 FAKVlb`8c=LS:CCPR9gGU3
+R8
+32
+R19
+!i10b 1
+R20
+R26
+R27
+!i113 0
+R13
+R14
+Abehaviour
+R2
+R3
+R4
+DEx4 work 16 audio_processing 0 22 ciCBF;4>WMSmzgQ[jF]NM1
+!i122 96
+l29
+Z28 L22 25
+VQWJ[7[g]Nl<o29iQehJig0
+!s100 Hd<^VCmVF3O<MffmSL1`22
+R8
+32
+!s110 1636986358
+!i10b 1
+!s108 1636986358.000000
+R26
+R27
+!i113 0
+R13
+R14
+w1636986355
+Eaudio_system_top
+Z29 w1636983714
+R2
+R3
+R4
+!i122 133
+R5
+Z30 8L:/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd
+Z31 FL:/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd
+l0
+R18
+VcI_`R?`Oifo<h@f=<T7aL1
+!s100 Jg_h?m2H@426BE];8G6;S0
+R8
+32
+R9
+!i10b 1
+R10
+Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|L:/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd|
+Z33 !s107 L:/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd|
+!i113 0
+R13
+R14
+Acomponents
+R2
+R3
+R4
+DEx4 work 16 audio_system_top 0 22 cI_`R?`Oifo<h@f=<T7aL1
+!i122 133
+l57
+L23 42
+Vijn0c9l8UIRA^RdE<hgDS2
+!s100 00OMfbi^^ini7ZY:0l[bf3
+R8
+32
+R9
+!i10b 1
+R10
+R32
+R33
+!i113 0
+R13
+R14
+Eaudio_system_top_tb
+Z34 w1636307895
+Z35 DPx4 ieee 16 std_logic_textio 0 22 8]8<fKiYoHe;_IDO3kmNH2
+R2
+R3
+R4
+!i122 134
+R5
+Z36 8L:/FastSignalProcessing/AUDIO_SYSTEM_TOP_TB.vhd
+Z37 FL:/FastSignalProcessing/AUDIO_SYSTEM_TOP_TB.vhd
+l0
+L8 1
+VFJ5`He5n2[J1iOm:EUgMn3
+!s100 6U2W6dXG21b0?A;=H38i;3
+R8
+32
+R9
+!i10b 1
+R10
+Z38 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|L:/FastSignalProcessing/AUDIO_SYSTEM_TOP_TB.vhd|
+Z39 !s107 L:/FastSignalProcessing/AUDIO_SYSTEM_TOP_TB.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R35
+R2
+R3
+R4
+DEx4 work 19 audio_system_top_tb 0 22 FJ5`He5n2[J1iOm:EUgMn3
+!i122 134
+l42
+L11 106
+Vd2JYFPDBSZaAT6kE<hH?_0
+!s100 2^]VYzFFB20`j;IbLm4<=3
+R8
+32
+R9
+!i10b 1
+R10
+R38
+R39
+!i113 0
+R13
+R14
+Edelay
+Z40 w1637591766
+R2
+R3
+R4
+!i122 136
+R5
+Z41 8L:/FastSignalProcessing/DELAY.vhd
+Z42 FL:/FastSignalProcessing/DELAY.vhd
+l0
+R18
+Vl>@YHoi?nD`7mB8hnSdD`3
+!s100 `5hX^FM3JGPoEeReEDoFi1
+R8
+32
+R9
+!i10b 1
+R10
+Z43 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|L:/FastSignalProcessing/DELAY.vhd|
+Z44 !s107 L:/FastSignalProcessing/DELAY.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+DEx4 work 5 delay 0 22 l>@YHoi?nD`7mB8hnSdD`3
+!i122 136
+l29
+R28
+VFaj[e;CHcBVO2UzLlDSH30
+!s100 lRd`GaELL]NJKdS_5HBf41
+R8
+32
+R9
+!i10b 1
+R10
+R43
+R44
+!i113 0
+R13
+R14
+Efir_filter
+Z45 w1637591145
+R2
+R3
+R4
+!i122 135
+R5
+Z46 8L:/FastSignalProcessing/FIR_FILTER.vhd
+Z47 FL:/FastSignalProcessing/FIR_FILTER.vhd
+l0
+L6 1
+VYaOmC6>Z8O]19?P@QNYe>2
+!s100 d@Nl?Y@h42XL97T>>nK2:2
+R8
+32
+R9
+!i10b 1
+R10
+Z48 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|L:/FastSignalProcessing/FIR_FILTER.vhd|
+Z49 !s107 L:/FastSignalProcessing/FIR_FILTER.vhd|
+!i113 0
+R13
+R14
+Afir_transpose
+R2
+R3
+R4
+DEx4 work 10 fir_filter 0 22 YaOmC6>Z8O]19?P@QNYe>2
+!i122 135
+l36
+L22 41
+VaB^aKC8V1gLnHCbz6OaDH3
+!s100 BlE0WaS>:2ED8kUPJ11IW2
+R8
+32
+R9
+!i10b 1
+R10
+R48
+R49
+!i113 0
+R13
+R14
