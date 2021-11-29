@@ -67,7 +67,7 @@ INST_DELAY : DELAY
 INST_FIR_FILTER : FIR_FILTER
 	port map(CLK,SRESETN,signed(AUDIO_IN),X_TILDE);
 INST_ADD_MULT : ADD_MULT
-	port map(X_TILDE,X_DELAYED,AUDIO_OUT,CLK,SRESETN);
+	port map(X_TILDE,X_DELAYED,Y,CLK,SRESETN);
 
-AUDIO_OUT<=std_logic_vector(Y)
+AUDIO_OUT<=std_logic_vector(Y);
 end Components;

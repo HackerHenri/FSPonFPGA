@@ -60,8 +60,8 @@ architecture DOUBLE_LUT of ADD_MULT is
           110,  114,  117,  120,  123,  125,  126,  127
     );
 
-    signal sin_line: signed (sine_width downto 0);
-    signal cos_line: signed (sine_width downto 0);
+    signal sin_line: signed ((data_width+sine_width) downto 0);
+    signal cos_line: signed ((data_width+sine_width) downto 0);
     signal LUT_idx: integer range 0 to 96; -- Default value of 0
 
     begin
@@ -73,8 +73,8 @@ architecture DOUBLE_LUT of ADD_MULT is
                 -- Switch index back to first elements of sin_array and cos_array
                 LUT_idx <= 0;
                 -- Reset all sin_line, cos_line, filtered_line, delayed_line, out_line to 0s
-                sin_line <= "0000";
-                cos_line <= "0000";
+                sin_line <= (others=>'0');
+                cos_line <= (others=>'0');
                 out_line <= (others=>'0');
             else
                 -- Multiply delayed_line with cos_array value

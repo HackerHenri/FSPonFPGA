@@ -13,6 +13,7 @@ entity AUDIO_PROCESSING is
 	port(
 		CLK				: in std_logic;
 		SRESETN				: in std_logic;
+		ENABLE				: in std_logic;
 		AUDIO_IN			: in std_logic_vector(W-1 downto 0);
 		AUDIO_OUT			: out std_logic_vector(W-1 downto 0)
 	);
@@ -27,6 +28,7 @@ component DELAY is
 	port(
 		CLK				: in std_logic;
 		SRESETN				: in std_logic;
+		ENABLE				: in std_logic;
 		X				: in std_logic_vector(W-1 downto 0);
 		X_DELAYED			: out signed(W-1 downto 0)
 	);

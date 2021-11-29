@@ -1,4 +1,4 @@
-L:/FastSignalProcessing/Modulator.vhd {2 {vcom -work work -2002 -explicit -vopt -stats=none L:/FastSignalProcessing/Modulator.vhd
+L:/FastSignalProcessing/Modulator.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/FastSignalProcessing/Modulator.vhd
 Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -6,17 +6,6 @@ Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
 -- Loading package NUMERIC_STD
 -- Compiling entity ADD_MULT
 -- Compiling architecture DOUBLE_LUT of ADD_MULT
-** Warning: L:/FastSignalProcessing/Modulator.vhd(76): (vcom-1272) Length of expected is 8; length of actual is 4.
-** Warning: L:/FastSignalProcessing/Modulator.vhd(77): (vcom-1272) Length of expected is 8; length of actual is 4.
-
-} {} {}} L:/FastSignalProcessing/DELAY.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/FastSignalProcessing/DELAY.vhd
-Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity DELAY
--- Compiling architecture BEHAVIORAL of DELAY
 
 } {} {}} L:/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd
 Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
@@ -54,14 +43,5 @@ Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
 -- Loading package NUMERIC_STD
 -- Compiling entity AUDIO_CODEC_COM
 -- Compiling architecture BEHAVIORAL of AUDIO_CODEC_COM
-
-} {} {}} L:/FastSignalProcessing/FIR_FILTER.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/FastSignalProcessing/FIR_FILTER.vhd
-Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity FIR_FILTER
--- Compiling architecture FIR_TRANSPOSE of FIR_FILTER
 
 } {} {}}

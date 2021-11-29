@@ -14,6 +14,7 @@ entity DELAY is
 	port(
 		CLK				: in std_logic;
 		SRESETN				: in std_logic;
+		ENABLE				: in std_logic;
 		X				: in std_logic_vector(W-1 downto 0);
 		X_DELAYED			: out signed(W-1 downto 0)
 	);
@@ -35,7 +36,9 @@ begin
 		if SRESETN = '0' then
 			SR <= (others=>(others=>'0'));
 		else
+			if ENABLE ='1';
 				SR <= SR(SR'high -1 downto sr'low ) & signed(X);
+			end if;
 		end if;
 	end if;
 end process;

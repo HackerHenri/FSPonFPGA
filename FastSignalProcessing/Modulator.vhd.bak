@@ -75,7 +75,7 @@ architecture DOUBLE_LUT of ADD_MULT is
                 -- Reset all sin_line, cos_line, filtered_line, delayed_line, out_line to 0s
                 sin_line <= "0000";
                 cos_line <= "0000";
-                out_line <= "0000";
+                out_line <= (others=>'0');
             else
                 -- Multiply delayed_line with cos_array value
                 -- cos_line <= resize(delayed_line * cos_array(counter), data_width);

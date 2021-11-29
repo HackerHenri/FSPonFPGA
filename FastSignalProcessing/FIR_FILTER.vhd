@@ -15,6 +15,7 @@ generic
 port
 	(CLK: 		      in  std_logic;   -- clock
 	 RESET_N:	      in  std_logic;   -- asynch reset, active-low
+	 ENABLE: 	      in std_logic;
 	 XN: 		      in  signed(XN_WIDTH-1 downto 0);   -- filter input
 	 YN: 		      out signed(YN_WIDTH-1 downto 0));   -- filter output
 end FIR_FILTER;
@@ -40,10 +41,12 @@ begin
 	   if RESET_N ='0' then	
 		   ADD <= (others => (others => '0')) after 3 ns; 
 	   else  
+		if ENABLE ='1';
 		      ADD(TAPS-1) <= PROD(TAPS-1) after 3 ns; 
 		      for I in (TAPS-2) downto 0  loop		 
 		         ADD(I) <= ADD(I+1) + PROD(I) after 3 ns; 
-		      end loop;				
+		      end loop;	
+		end if;			
 	   end if;
 	end if;
 end process ADD_STAGES;
