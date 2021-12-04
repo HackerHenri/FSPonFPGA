@@ -53,11 +53,12 @@ end component FIR_FILTER;
 component ADD_MULT is
     generic(data_width: natural := 16);
     port(
-        filtered_line: in signed(data_width-1 downto 0);
-        delayed_line: in signed(data_width-1 downto 0);
-        out_line: out signed(data_width-1 downto 0);
-        clock: in std_logic;
-        reset: in std_logic
+        FILTERED_LINE: in signed(data_width-1 downto 0);
+        DELAYED_LINE: in signed(data_width-1 downto 0);
+        OUT_LINE: out signed(data_width-1 downto 0);
+		ENABLE: in std_logic;
+        CLOCK: in std_logic;
+        RESET: in std_logic
         );
 end component ADD_MULT;
 	
@@ -69,7 +70,7 @@ INST_DELAY : DELAY
 INST_FIR_FILTER : FIR_FILTER
 	port map(CLK,SRESETN,signed(AUDIO_IN),X_TILDE);
 INST_ADD_MULT : ADD_MULT
-	port map(X_TILDE,X_DELAYED,Y,CLK,SRESETN);
+	port map(X_TILDE,X_DELAYED,Y,ENABLE,CLK,SRESETN);
 
 AUDIO_OUT<=std_logic_vector(Y);
 end Components;

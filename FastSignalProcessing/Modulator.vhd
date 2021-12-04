@@ -1,37 +1,26 @@
--- Overview :
--- Component with two inputs (FILTERED_LINE and DELAYED_LINE) and one output (OUT_LINE)
--- FILTERED_LINE multiplied with value of negative sine signal
--- DELAYED_LINE multipled with value of positive cosine signal
--- FILTERED_LINE and DELAYED_LINE added to get OUT_LINE
--- 16 bits for FILTERED_LINE, DELAYED_LINE, OUT_LINE
--- Lookup tables for discrete sine and cosine signal values
-
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity ADD_MULT is
-    generic(data_width: natural := 16);
+    generic(DATA_WIDTH: natural := 16);
     port(
-        filtered_line: in signed(data_width-1 downto 0);
-        delayed_line: in signed(data_width-1 downto 0);
-        out_line: out signed(data_width-1 downto 0);
-        clock: in std_logic;
-        reset: in std_logic
+        FILTERED_LINE: in signed(data_width-1 downto 0);
+        DELAYED_LINE: in signed(data_width-1 downto 0);
+        OUT_LINE: out signed(data_width-1 downto 0);
+        ENABLE: in std_logic;
+        CLOCK: in std_logic;
+        RESET: in std_logic
         );
 end entity;
-
-    -- CHANGE SINE/COSINE ARRAYS WITH 48 VALUES TO 96 VALUES
-    -- CHANGE VARIABLE "COUNTER" TO SIGNAL (PROCESS-INTERNAL VARIABLE SHOULD NOT BE USED WITH PROCESS-EXTERNAL MEMORY)
-    -- RENAME VARIABLE "COUNTER", BECAUSE NAME IS TOO UNIVERSAL
     
 architecture DOUBLE_LUT of ADD_MULT is
-    constant sine_samples: natural := 96;  -- Number of samples of sine/cosine signals
-    constant sine_width: natural := 8-1; -- Width of sine/cosine signals
+    constant SINE_SAMPLES: natural := 96;  -- Number of samples of sine/cosine signals
+    constant SINE_WIDTH: natural := 8-1; -- Width of sine/cosine signals
 
-    type SINE_ARR is array (0 to sine_samples-1) of integer range 2**sine_width-1 downto -(2**sine_width);
+    type SINE_ARR is array (0 to SINE_SAMPLES-1) of integer range 2**SINE_WIDTH-1 downto -(2**SINE_WIDTH);
 
-    signal sin_array: SINE_ARR := (
+    signal SIN_ARRAY: SINE_ARR := (
             0,    8,   17,   25,   33,   41,   49,   56,
            63,   71,   77,   84,   90,   95,  101,  106,
           110,  114,  117,  120,  123,  125,  126,  127,
@@ -45,48 +34,55 @@ architecture DOUBLE_LUT of ADD_MULT is
          -110, -106, -101,  -95,  -90,  -84,  -77,  -71,
           -64,  -56,  -49,  -41,  -33,  -25,  -17,   -8
     );
-    signal cos_array: SINE_ARR := (
-          127,  127,  126,  125,  123,  120,  117,  114,
-          110,  106,  101,   95,   90,   84,   77,   71,
-           64,   56,   49,   41,   33,   25,   17,    8,
-           	0,   -8,  -17,  -25,  -33,  -41,  -49,  -56,
-          -63,  -71,  -77,  -84,  -90,  -95, -101, -106,
-         -110, -114, -117, -120, -123, -125, -126, -127,
-         -127, -127, -126, -125, -123, -120, -117, -114,
-         -110, -106, -101,  -95,  -90,  -84,  -77,  -71,
-          -64,  -56,  -49,  -41,  -33,  -25,  -17,   -8,
-            0,    8,   17,   25,   33,   41,   49,   56,
-           63,   71,   77,   84,   90,   95,  101,  106,
-          110,  114,  117,  120,  123,  125,  126,  127
-    );
+    -- signal COS_ARRAY: SINE_ARR := (
+    --       127,  127,  126,  125,  123,  120,  117,  114,
+    --       110,  106,  101,   95,   90,   84,   77,   71,
+    --        64,   56,   49,   41,   33,   25,   17,    8,
+    --        	0,   -8,  -17,  -25,  -33,  -41,  -49,  -56,
+    --       -63,  -71,  -77,  -84,  -90,  -95, -101, -106,
+    --      -110, -114, -117, -120, -123, -125, -126, -127,
+    --      -127, -127, -126, -125, -123, -120, -117, -114,
+    --      -110, -106, -101,  -95,  -90,  -84,  -77,  -71,
+    --       -64,  -56,  -49,  -41,  -33,  -25,  -17,   -8,
+    --         0,    8,   17,   25,   33,   41,   49,   56,
+    --        63,   71,   77,   84,   90,   95,  101,  106,
+    --       110,  114,  117,  120,  123,  125,  126,  127
+    -- );
 
-    signal sin_line: signed ((data_width+sine_width) downto 0);
-    signal cos_line: signed ((data_width+sine_width) downto 0);
-    signal LUT_idx: integer range 0 to 96; -- Default value of 0
+    signal SIN_LINE, COS_LINE: signed ((DATA_WIDTH+SINE_WIDTH) downto 0); -- 25-bit to handle multiplication and addition
+    signal LUT_IDX_SIN: integer range 0 to SINE_SAMPLES-1 := 0;
+    signal LUT_IDX_COS: integer range 0 to SINE_SAMPLES-1 := 24;
 
     begin
-
-    ALU: process (clock, reset)
+    ALU: process (CLOCK, RESET)
     begin
-        if rising_edge(clock) then
-            if reset = '1' then -- asynchronous reset
-                -- Switch index back to first elements of sin_array and cos_array
-                LUT_idx <= 0;
-                -- Reset all sin_line, cos_line, filtered_line, delayed_line, out_line to 0s
-                sin_line <= (others=>'0');
-                cos_line <= (others=>'0');
-                out_line <= (others=>'0');
-            else
+        if rising_edge(CLOCK) then
+            if RESET = '1' then -- Synchronous reset
+                LUT_IDX_SIN <= 0;
+                LUT_IDX_COS <= 24;
+                SIN_LINE <= (others=>'0');
+                COS_LINE <= (others=>'0');
+                OUT_LINE <= (others=>'0');
+            elsif ENABLE = '1' then -- Only process when ENABLE '1'
                 -- Multiply delayed_line with cos_array value
-                -- cos_line <= resize(delayed_line * cos_array(counter), data_width);
-                cos_line <= delayed_line * to_signed(cos_array(LUT_idx), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
+                COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
                 -- Multiply filtered_line with sin_array value
-                -- sin_line <= - resize(filtered_line * sin_array(counter), data_width);
-                sin_line <= -(filtered_line * to_signed(sin_array(LUT_idx), 8)); -- 24-bit
+                SIN_LINE <= -(FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8)); -- 24-bit
                 -- Add two signals into one output
-                out_line <= resize((cos_line(sine_width-1) & cos_line) + (sin_line(sine_width-1) & sin_line), data_width); -- resize 25-bit to 16-bit
-                LUT_idx <= LUT_idx + 1;
+                OUT_LINE <= resize((COS_LINE(SINE_WIDTH-1) & COS_LINE) + (SIN_LINE(SINE_WIDTH-1) & SIN_LINE), DATA_WIDTH); -- resize 25-bit to 16-bit
+                -- Increment or reset LUT_IDX
+                if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
+                    LUT_IDX_SIN <= LUT_IDX_SIN + 1;
+                    LUT_IDX_COS <= 0;
+                elsif LUT_IDX_SIN = 95 then
+                    LUT_IDX_SIN <= 0;
+                    LUT_IDX_COS <= LUT_IDX_COS + 1;
+                else
+                    LUT_IDX_SIN <= LUT_IDX_SIN + 1;
+                    LUT_IDX_COS <= LUT_IDX_COS + 1;
+                end if;
             end if;
+            -- Do nothing if RESET = '0' and ENABLE = '0'
         end if;
     end process;    
 end architecture;
