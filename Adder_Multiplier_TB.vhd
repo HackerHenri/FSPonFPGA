@@ -14,23 +14,25 @@ architecture STIMULI of ADD_MULT_TB is
             filtered_line: in signed;
             delayed_line: in signed;
             out_line: out signed;
+            enable: in std_logic;
             clock: in std_logic;
             reset: in std_logic
             );
     end component;
 
     -- Signals for DUT connections
-    signal	filtered_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
-    signal	delayed_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
-    signal  out_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
-    signal  clock_dut: std_logic := '0';
-    signal  reset_dut: std_logic := '0';
+    signal filtered_line_dut: signed(data_width-1 downto 0);
+    signal delayed_line_dut: signed(data_width-1 downto 0);
+    signal out_line_dut: signed(data_width-1 downto 0);
+    signal enable_dut: std_logic := '0';
+    signal clock_dut: std_logic := '0';
+    signal reset_dut: std_logic := '0';
 
     -- Constant clock signal
     constant clock_period: time := 10 ns;
 
     -- Array for test input and output values
-    type test_array is array (natural range<>, natural range<>) of integer 2**data_width-1 to -(2**data_width);
+    type test_array is array (natural range<>, natural range<>) of integer range 2**data_width-1 downto -(2**data_width);
     constant test_register: test_array := (
         -- Matches values from matlab arrays 'x_tilde_mid', 'x_delayed_mid', 'y_mid'
         (    29,   -14, -1778), -- Matlab idx = 1201, LUT counter = 0
@@ -48,6 +50,7 @@ architecture STIMULI of ADD_MULT_TB is
                 filtered_line =>	filtered_line_dut,
                 delayed_line  =>	delayed_line_dut,
                 out_line	  =>	out_line_dut,
+                enable        =>    enable_dut,
                 clock		  =>	clock_dut,
                 reset		  =>	reset_dut );
         -- End of DUT instantiation
@@ -57,34 +60,19 @@ architecture STIMULI of ADD_MULT_TB is
 
         stimuli: process
         begin
+        	reset_dut <= '1';
+            wait for clock_period;
+            reset_dut <= '0';
             for I in test_register'range(1) loop
                 for J in test_register'range(2) loop
                     wait for clock_period;
-                    reset_dut <= '1';
-                    wait for clock_period
-                    reset_dut <= '0';
-                    filtered_line_dut <= to_signed(test_register(I, 0));
-                    delayed_line_dut <= to_signed(test_register(I, 1));
+                    enable_dut <= '1';
+                    filtered_line_dut <= to_signed(test_register(I, 0), 16);
+                    delayed_line_dut <= to_signed(test_register(I, 1), 16);
+                    wait for clock_period;
                 end loop;
-                wait for clock_period;
+                enable_dut <= '0';
             end loop;
-
-            -- -- Output received at least 325 us after entering input
-            -- CHECKER : process
-            -- begin
-            --     report "Testing entity SERIAL_TX_RX.";
-                
-            --     for i in 0 to last_cycle-1 loop
-            --         wait for test_delay;
-            --         assert left_channel_audio_out = std_logic_vector(to_unsigned(test_data_left(i), 16))
-            --             report "Error: left_channel_audio_out /= test_data_left"
-            --             severity failure;
-            --         assert right_channel_audio_out = std_logic_vector(to_unsigned(test_data_right(i), 16))
-            --             report "Error: right_channel_audio_out /= test_data_right"
-            --             severity failure;
-            --     end loop;
-            --     report "Test of SERIAL_TX_RX successful." severity failure;
-            -- end process;
 
             -- end simulation
             assert false report "end of simulation" severity failure;
