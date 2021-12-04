@@ -9,7 +9,7 @@ t = 0:1/fs:.8008-1/fs; % maybe next time
 %t = 0:1/fs:4.5938-1/fs; % longer signal
 
 input = audioread("maybe-next-time.wav");
-x_test = round((2^15-1)*input); %maybe next time
+x_test = round((2^15-1)*input(1110:38440)); %maybe next time
 % x_test = round((2^15-1)*chirp(t,100,.1-1/fs,1000));  %input signal
 %x_test = fi(chirp(t,100,.1-1/fs,1000),1,16,15);  %input signal
 %x_test = round((2^15-1)*input_example); %longer example from emil
@@ -74,7 +74,7 @@ for n=1:length(x_test)
     counter_mid(n) = index_LUT; % Add to record values inside loop for ADD_MULT
 % calculate index for LUT
     index_LUT = index_LUT+1;
-    if index_LUT > 48
+    if index_LUT > 96
         index_LUT = 1;
     end
 end
