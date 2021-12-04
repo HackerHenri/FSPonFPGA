@@ -50,7 +50,7 @@ architecture STIMULI of ADD_MULT_TB is
                 filtered_line =>	filtered_line_dut,
                 delayed_line  =>	delayed_line_dut,
                 out_line	  =>	out_line_dut,
-                enable        =>    enable_dut,
+                enable => enable_dut,
                 clock		  =>	clock_dut,
                 reset		  =>	reset_dut );
         -- End of DUT instantiation
@@ -63,16 +63,32 @@ architecture STIMULI of ADD_MULT_TB is
         	reset_dut <= '1';
             wait for clock_period;
             reset_dut <= '0';
-            for I in test_register'range(1) loop
-                for J in test_register'range(2) loop
-                    wait for clock_period;
-                    enable_dut <= '1';
-                    filtered_line_dut <= to_signed(test_register(I, 0), 16);
-                    delayed_line_dut <= to_signed(test_register(I, 1), 16);
-                    wait for clock_period;
-                end loop;
-                enable_dut <= '0';
-            end loop;
+            wait for clock_period;
+            
+            enable_dut <= '1';
+            filtered_line_dut <= to_signed(test_register(0,0), 16);
+            delayed_line_dut <= to_signed(test_register(0,1), 16);
+            wait for clock_period *2;
+            enable_dut <= '0';
+            wait for clock_period;
+            assert to_integer(out_line_dut) = test_register(0,2)
+                report to_integer(out_line_dut);
+
+            enable_dut <= '1';
+            filtered_line_dut <= to_signed(test_register(1,0), 16);
+            delayed_line_dut <= to_signed(test_register(1,1), 16);
+            wait for clock_period *2;
+            enable_dut <= '0';
+            wait for clock_period;
+            assert to_integer(out_line_dut) = test_register(1,2);
+
+
+--             for I in test_register'range(1) loop
+--                 enable_dut <= '1';
+--                 filtered_line_dut <= to_signed(test_register(I, 0), 16);
+--                 delayed_line_dut <= to_signed(test_register(I, 1), 16);
+--                 wait for clock_period;
+--             end loop;
 
             -- end simulation
             assert false report "end of simulation" severity failure;

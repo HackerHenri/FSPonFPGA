@@ -14,7 +14,7 @@ entity ADD_MULT is
         );
 end entity;
     
-architecture DOUBLE_LUT of ADD_MULT is
+architecture SINGLE_LUT of ADD_MULT is
     constant SINE_SAMPLES: natural := 96;  -- Number of samples of sine/cosine signals
     constant SINE_WIDTH: natural := 8-1; -- Width of sine/cosine signals
 
@@ -34,20 +34,6 @@ architecture DOUBLE_LUT of ADD_MULT is
          -110, -106, -101,  -95,  -90,  -84,  -77,  -71,
           -64,  -56,  -49,  -41,  -33,  -25,  -17,   -8
     );
-    -- signal COS_ARRAY: SINE_ARR := (
-    --       127,  127,  126,  125,  123,  120,  117,  114,
-    --       110,  106,  101,   95,   90,   84,   77,   71,
-    --        64,   56,   49,   41,   33,   25,   17,    8,
-    --        	0,   -8,  -17,  -25,  -33,  -41,  -49,  -56,
-    --       -63,  -71,  -77,  -84,  -90,  -95, -101, -106,
-    --      -110, -114, -117, -120, -123, -125, -126, -127,
-    --      -127, -127, -126, -125, -123, -120, -117, -114,
-    --      -110, -106, -101,  -95,  -90,  -84,  -77,  -71,
-    --       -64,  -56,  -49,  -41,  -33,  -25,  -17,   -8,
-    --         0,    8,   17,   25,   33,   41,   49,   56,
-    --        63,   71,   77,   84,   90,   95,  101,  106,
-    --       110,  114,  117,  120,  123,  125,  126,  127
-    -- );
 
     signal SIN_LINE, COS_LINE: signed ((DATA_WIDTH+SINE_WIDTH) downto 0); -- 25-bit to handle multiplication and addition
     signal LUT_IDX_SIN: integer range 0 to SINE_SAMPLES-1 := 0;
