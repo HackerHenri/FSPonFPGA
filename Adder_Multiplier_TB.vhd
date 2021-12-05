@@ -35,11 +35,17 @@ architecture STIMULI of ADD_MULT_TB is
     type test_array is array (natural range<>, natural range<>) of integer range 2**data_width-1 downto -(2**data_width);
     constant test_register: test_array := (
         -- Matches values from matlab arrays 'x_tilde_mid', 'x_delayed_mid', 'y_mid'
-        (    29,   -14, -1778), -- Matlab idx = 1201, LUT counter = 0
-        (    -3,   -22, -2721), -- Matlab idx = 1202, LUT counter = 1
-        (     6,     6,   540), -- Matlab idx = 1203, LUT counter = 2
-        (    28,   -12, -2776), -- Matlab idx = 1204, LUT counter = 3
-        (     1,   -23, -2593) -- Matlab idx = 1205, LUT counter = 4
+        (    20,   -64, -8128), -- Matlab idx = 1729, LUT counter = 0
+        (    50,   -67, -8909), -- Matlab idx = 1730, LUT counter = 1
+        (    33,   -85,-11271), -- Matlab idx = 1731, LUT counter = 2
+        (    26,   -54, -7400), -- Matlab idx = 1732, LUT counter = 3
+        (    56,   -55, -8613), -- Matlab idx = 1733, LUT counter = 4
+
+        (   122,   -87,-15442), -- Matlab idx = 1926, LUT counter = 5
+        (    97,   -62,-12007), -- Matlab idx = 1927, LUT counter = 6
+        (   121,   -53,-12818), -- Matlab idx = 1928, LUT counter = 7
+        (   113,   -81,-16029), -- Matlab idx = 1929, LUT counter = 8
+        (    88,   -64,-13032) -- Matlab idx = 1930, LUT counter = 9
     );
 
     begin
