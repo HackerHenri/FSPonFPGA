@@ -39,36 +39,65 @@ architecture SINGLE_LUT of ADD_MULT is
     signal LUT_IDX_SIN: integer range 0 to SINE_SAMPLES-1 := 0;
     signal LUT_IDX_COS: integer range 0 to SINE_SAMPLES-1 := 24;
 
+    signal NEXT_STATE: natural range 0 to 3 := 0;
+    signal STATE_REGISTER: natural range 0 to 3 := 2;
+    constant IDLE_STATE: natural := 0;
+    constant MULT_STATE: natural := 1;
+    constant ADD_STATE: natural := 2;
+    constant RESET_STATE: natural := 3;
+
     begin
-    ALU: process (CLOCK, RESET)
-    begin
-        if rising_edge(CLOCK) then
-            if RESET = '1' then -- Synchronous reset
-                LUT_IDX_SIN <= 0;
-                LUT_IDX_COS <= 24;
-                SIN_LINE <= (others=>'0');
-                COS_LINE <= (others=>'0');
-                OUT_LINE <= (others=>'0');
-            elsif ENABLE = '1' then -- Only process when ENABLE '1'
-                -- Multiply delayed_line with cos_array value
-                COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
-                -- Multiply filtered_line with sin_array value
-                SIN_LINE <= -(FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8)); -- 24-bit
-                -- Add two signals into one output
-                OUT_LINE <= resize((COS_LINE(SINE_WIDTH-1) & COS_LINE) + (SIN_LINE(SINE_WIDTH-1) & SIN_LINE), DATA_WIDTH); -- resize 25-bit to 16-bit
-                -- Increment or reset LUT_IDX
-                if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
-                    LUT_IDX_SIN <= LUT_IDX_SIN + 1;
-                    LUT_IDX_COS <= 0;
-                elsif LUT_IDX_SIN = 95 then
-                    LUT_IDX_SIN <= 0;
-                    LUT_IDX_COS <= LUT_IDX_COS + 1;
+        -- Process to reset when RESET='1' and initiate arithmetic when ENABLE='1'
+        STATES: process(CLOCK)
+        begin
+            if rising_edge(CLOCK) then
+                if RESET = '1' then
+                    STATE_REGISTER <= RESET_STATE;
+                elsif ENABLE = '1' then
+                    STATE_REGISTER <= MULT_STATE;
                 else
-                    LUT_IDX_SIN <= LUT_IDX_SIN + 1;
-                    LUT_IDX_COS <= LUT_IDX_COS + 1;
+                    STATE_REGISTER <= NEXT_STATE;
                 end if;
             end if;
-            -- Do nothing if RESET = '0' and ENABLE = '0'
-        end if;
-    end process;    
+        end process;
+
+        -- Process to handle arithmetic operations with state machine (triggered when ENABLE='1')
+        ALU: process (STATE_REGISTER, NEXT_STATE)
+        begin
+            NEXT_STATE <= STATE_REGISTER;
+
+            case STATE_REGISTER is
+                when IDLE_STATE =>
+                    SIN_LINE <= (others=>'0');
+                    COS_LINE <= (others=>'0');
+                when MULT_STATE =>
+                    -- Multiply delayed_line with cos_array value
+                    COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
+                    -- Multiply filtered_line with sin_array value
+                    SIN_LINE <= -(FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8)); -- 24-bit
+                    NEXT_STATE <= ADD_STATE;
+                when ADD_STATE =>
+                    -- Add two signals into one output
+                    OUT_LINE <= resize((COS_LINE(DATA_WIDTH-1) & COS_LINE) + (SIN_LINE(DATA_WIDTH-1) & SIN_LINE), DATA_WIDTH); -- resize 25-bit to 16-bit
+                    -- Increment or reset LUT_IDX
+                    if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
+                        LUT_IDX_SIN <= LUT_IDX_SIN + 1;
+                        LUT_IDX_COS <= 0;
+                    elsif LUT_IDX_SIN = 95 then
+                        LUT_IDX_SIN <= 0;
+                        LUT_IDX_COS <= LUT_IDX_COS + 1;
+                    else
+                        LUT_IDX_SIN <= LUT_IDX_SIN + 1;
+                        LUT_IDX_COS <= LUT_IDX_COS + 1;
+                    end if;
+                    NEXT_STATE <= IDLE_STATE;
+                when RESET_STATE =>
+                    LUT_IDX_SIN <= 0;
+                    LUT_IDX_COS <= 24;
+                    OUT_LINE <= (others=>'0');
+                    NEXT_STATE <= IDLE_STATE;
+                when others =>
+                    NEXT_STATE <= IDLE_STATE;
+            end case;
+        end process;
 end architecture;

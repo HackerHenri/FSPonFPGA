@@ -64,31 +64,19 @@ architecture STIMULI of ADD_MULT_TB is
             wait for clock_period;
             reset_dut <= '0';
             wait for clock_period;
-            
-            enable_dut <= '1';
-            filtered_line_dut <= to_signed(test_register(0,0), 16);
-            delayed_line_dut <= to_signed(test_register(0,1), 16);
-            wait for clock_period *2;
-            enable_dut <= '0';
-            wait for clock_period;
-            assert to_integer(out_line_dut) = test_register(0,2)
-                report to_integer(out_line_dut);
-
-            enable_dut <= '1';
-            filtered_line_dut <= to_signed(test_register(1,0), 16);
-            delayed_line_dut <= to_signed(test_register(1,1), 16);
-            wait for clock_period *2;
-            enable_dut <= '0';
-            wait for clock_period;
-            assert to_integer(out_line_dut) = test_register(1,2);
 
 
---             for I in test_register'range(1) loop
---                 enable_dut <= '1';
---                 filtered_line_dut <= to_signed(test_register(I, 0), 16);
---                 delayed_line_dut <= to_signed(test_register(I, 1), 16);
---                 wait for clock_period;
---             end loop;
+            for I in test_register'range(1) loop
+                enable_dut <= '1';
+                filtered_line_dut <= to_signed(test_register(I, 0), data_width);
+                delayed_line_dut <= to_signed(test_register(I, 1), data_width);
+                wait for clock_period;
+                enable_dut <= '0';
+                wait for clock_period *2;
+                assert out_line_dut = to_signed(test_register(I,2), data_width)
+                	report "Error: Output not as expected"
+                    severity failure;
+            end loop;
 
             -- end simulation
             assert false report "end of simulation" severity failure;
