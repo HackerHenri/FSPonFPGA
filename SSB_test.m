@@ -43,6 +43,8 @@ x_tilde_mid=zeros(1,length(x_test));
 x_delayed_mid = zeros(1,length(x_test));
 y_mid=zeros(1,length(x_test));
 counter_mid=zeros(1,length(x_test));
+cos_mid=zeros(1,length(x_test));
+sin_mid=zeros(1,length(x_test));
 %% For loop simulation of sample by sample
 for n=1:length(x_test)   
 % shift register for Filter
@@ -68,7 +70,9 @@ for n=1:length(x_test)
     x_delayed_mid(n) = x_delayed_test(n); % Add to record values inside loop for ADD_MULT
     x_tilde_mid(n) = x_tilde_test(n); % Add to record values inside loop for ADD_MULT
 
-    y(n) = x_delayed_test(n)*LUT_cos(index_LUT) - x_tilde_test(n)*LUT_sin(index_LUT);
+    cos_mid(n) = x_delayed_test(n)*LUT_cos(index_LUT);
+    sin_mid(n) = -(x_tilde_test(n)*LUT_sin(index_LUT));
+    y(n) = cos_mid(n) + sin_mid(n);
 
     y_mid(n) = y(n); % Add to record values inside loop for ADD_MULT
     counter_mid(n) = index_LUT; % Add to record values inside loop for ADD_MULT
