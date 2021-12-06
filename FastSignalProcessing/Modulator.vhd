@@ -7,7 +7,7 @@ entity ADD_MULT is
     port(
         FILTERED_LINE: in signed(data_width-1 downto 0);
         DELAYED_LINE: in signed(data_width-1 downto 0);
-        OUT_LINE: out signed(data_width-1 downto 0);
+        OUT_LINE: out std_logic_vector(data_width-1 downto 0);
         ENABLE: in std_logic;
         CLOCK: in std_logic;
         RESET: in std_logic
@@ -36,6 +36,7 @@ architecture SINGLE_LUT of ADD_MULT is
     );
 
     signal SIN_LINE, COS_LINE: signed ((DATA_WIDTH+SINE_WIDTH) downto 0); -- 25-bit to handle multiplication and addition
+    signal SLICE_LINE: std_logic_vector((DATA_WIDTH+SINE_WIDTH+1) downto 0);
     signal LUT_IDX_SIN: integer range 0 to SINE_SAMPLES-1 := 0;
     signal LUT_IDX_COS: integer range 0 to SINE_SAMPLES-1 := 24;
 
@@ -95,7 +96,9 @@ architecture SINGLE_LUT of ADD_MULT is
                     NEXT_STATE <= ADD_STATE;
                 when ADD_STATE =>
                     -- Add two signals into one output
-                    OUT_LINE <= resize((COS_LINE(DATA_WIDTH-1) & COS_LINE) + (SIN_LINE(DATA_WIDTH-1) & SIN_LINE), DATA_WIDTH); -- resize 25-bit to 16-bit
+                    SLICE_LINE <= std_logic_vector((COS_LINE(DATA_WIDTH-1) & COS_LINE) + (SIN_LINE(DATA_WIDTH-1) & SIN_LINE));
+                    OUT_LINE <= SLICE_LINE(24 downto 8); -- Rescale from 25-bit to 16-bit by slicing the std_logic_vector
+
                     -- Increment or reset LUT_IDX
                     if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
                         LUT_IDX_SIN <= LUT_IDX_SIN + 1;
