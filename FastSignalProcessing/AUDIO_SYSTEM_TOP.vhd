@@ -44,8 +44,9 @@ end component AUDIO_CODEC_COM;
 component AUDIO_PROCESSING
 	generic(W : integer := 16);
 	port(
-		CLK				: in std_logic;
+		CLK			: in std_logic;
 		SRESETN			: in std_logic;
+		ENABLE			: in std_logic;
 		AUDIO_IN		: in std_logic_vector(W-1 downto 0);
 		AUDIO_OUT		: out std_logic_vector(W-1 downto 0)
 	);
@@ -59,6 +60,6 @@ INST_AUDIO_CODEC_COM : AUDIO_CODEC_COM
 	port map (CLK,SRESETN,SYSCLK,BCK,LRC,DIN,AUDIO_PAR_IN_L,AUDIO_PAR_IN_R,START_L,START_R,AUDIO_PAR_OUT_L,AUDIO_PAR_OUT_R,DOUT);
 
 INST_AUDIO_PROCESSING : AUDIO_PROCESSING 
-    port map (CLK,SRESETN,START_L,AUDIO_PAR_IN_R,AUDIO_PAR_OUT_R);
+    port map (CLK,SRESETN,START_R,AUDIO_PAR_IN_R,AUDIO_PAR_OUT_R);
 		
 end COMPONENTS;

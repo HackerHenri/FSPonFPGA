@@ -1,0 +1,47 @@
+L:/HAWCloud/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/HAWCloud/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd
+Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity AUDIO_PROCESSING
+-- Compiling architecture Components of AUDIO_PROCESSING
+
+} {} {}} L:/HAWCloud/FastSignalProcessing/AUDIO_SYSTEM_TOP_TB.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/HAWCloud/FastSignalProcessing/AUDIO_SYSTEM_TOP_TB.vhd
+Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_textio
+-- Compiling entity AUDIO_SYSTEM_TOP_TB
+-- Compiling architecture BEHAVIORAL of AUDIO_SYSTEM_TOP_TB
+
+} {} {}} L:/HAWCloud/FastSignalProcessing/AUDIO_CODEC_COM.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/HAWCloud/FastSignalProcessing/AUDIO_CODEC_COM.vhd
+Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity AUDIO_CODEC_COM
+-- Compiling architecture BEHAVIORAL of AUDIO_CODEC_COM
+
+} {} {}} L:/HAWCloud/FastSignalProcessing/DELAY.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/HAWCloud/FastSignalProcessing/DELAY.vhd
+Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity DELAY
+-- Compiling architecture BEHAVIORAL of DELAY
+
+} {} {}} L:/HAWCloud/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none L:/HAWCloud/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd
+Model Technology ModelSim SE-64 vcom 2021.2 Compiler 2021.04 Apr 14 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity AUDIO_SYSTEM_TOP
+-- Compiling architecture COMPONENTS of AUDIO_SYSTEM_TOP
+
+} {} {}}

@@ -36,7 +36,7 @@ begin
 		if SRESETN = '0' then
 			SR <= (others=>(others=>'0'));
 		else
-			if ENABLE ='1';
+			if ENABLE ='1' then
 				SR <= SR(SR'high -1 downto sr'low ) & signed(X);
 			end if;
 		end if;

@@ -14,30 +14,38 @@ architecture STIMULI of ADD_MULT_TB is
             filtered_line: in signed;
             delayed_line: in signed;
             out_line: out signed;
+            enable: in std_logic;
             clock: in std_logic;
             reset: in std_logic
             );
     end component;
 
     -- Signals for DUT connections
-    signal	filtered_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
-    signal	delayed_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
-    signal  out_line_dut: signed(2**data_width-1 to -(2**data_width)) := 0;
-    signal  clock_dut: std_logic := '0';
-    signal  reset_dut: std_logic := '0';
+    signal filtered_line_dut: signed(data_width-1 downto 0);
+    signal delayed_line_dut: signed(data_width-1 downto 0);
+    signal out_line_dut: signed(data_width-1 downto 0);
+    signal enable_dut: std_logic := '0';
+    signal clock_dut: std_logic := '0';
+    signal reset_dut: std_logic := '0';
 
     -- Constant clock signal
     constant clock_period: time := 10 ns;
 
     -- Array for test input and output values
-    type test_array is array (natural range<>, natural range<>) of integer 2**data_width-1 to -(2**data_width);
+    type test_array is array (natural range<>, natural range<>) of integer range 2**data_width-1 downto -(2**data_width);
     constant test_register: test_array := (
         -- Matches values from matlab arrays 'x_tilde_mid', 'x_delayed_mid', 'y_mid'
-        (    29,   -14, -1778), -- Matlab idx = 1201, LUT counter = 0
-        (    -3,   -22, -2721), -- Matlab idx = 1202, LUT counter = 1
-        (     6,     6,   540), -- Matlab idx = 1203, LUT counter = 2
-        (    28,   -12, -2776), -- Matlab idx = 1204, LUT counter = 3
-        (     1,   -23, -2593) -- Matlab idx = 1205, LUT counter = 4
+        (    20,   -64, -8128), -- Matlab idx = 1729, LUT counter = 0
+        (    50,   -67, -8909), -- Matlab idx = 1730, LUT counter = 1
+        (    33,   -85,-11271), -- Matlab idx = 1731, LUT counter = 2
+        (    26,   -54, -7400), -- Matlab idx = 1732, LUT counter = 3
+        (    56,   -55, -8613), -- Matlab idx = 1733, LUT counter = 4
+
+        (   122,   -87,-15442), -- Matlab idx = 1926, LUT counter = 5
+        (    97,   -62,-12007), -- Matlab idx = 1927, LUT counter = 6
+        (   121,   -53,-12818), -- Matlab idx = 1928, LUT counter = 7
+        (   113,   -81,-16029), -- Matlab idx = 1929, LUT counter = 8
+        (    88,   -64,-13032) -- Matlab idx = 1930, LUT counter = 9
     );
 
     begin
@@ -48,6 +56,7 @@ architecture STIMULI of ADD_MULT_TB is
                 filtered_line =>	filtered_line_dut,
                 delayed_line  =>	delayed_line_dut,
                 out_line	  =>	out_line_dut,
+                enable => enable_dut,
                 clock		  =>	clock_dut,
                 reset		  =>	reset_dut );
         -- End of DUT instantiation
@@ -57,34 +66,23 @@ architecture STIMULI of ADD_MULT_TB is
 
         stimuli: process
         begin
-            for I in test_register'range(1) loop
-                for J in test_register'range(2) loop
-                    wait for clock_period;
-                    reset_dut <= '1';
-                    wait for clock_period
-                    reset_dut <= '0';
-                    filtered_line_dut <= to_signed(test_register(I, 0));
-                    delayed_line_dut <= to_signed(test_register(I, 1));
-                end loop;
-                wait for clock_period;
-            end loop;
+        	reset_dut <= '1';
+            wait for clock_period;
+            reset_dut <= '0';
+            wait for clock_period;
 
-            -- -- Output received at least 325 us after entering input
-            -- CHECKER : process
-            -- begin
-            --     report "Testing entity SERIAL_TX_RX.";
-                
-            --     for i in 0 to last_cycle-1 loop
-            --         wait for test_delay;
-            --         assert left_channel_audio_out = std_logic_vector(to_unsigned(test_data_left(i), 16))
-            --             report "Error: left_channel_audio_out /= test_data_left"
-            --             severity failure;
-            --         assert right_channel_audio_out = std_logic_vector(to_unsigned(test_data_right(i), 16))
-            --             report "Error: right_channel_audio_out /= test_data_right"
-            --             severity failure;
-            --     end loop;
-            --     report "Test of SERIAL_TX_RX successful." severity failure;
-            -- end process;
+
+            for I in test_register'range(1) loop
+                enable_dut <= '1';
+                filtered_line_dut <= to_signed(test_register(I, 0), data_width);
+                delayed_line_dut <= to_signed(test_register(I, 1), data_width);
+                wait for clock_period;
+                enable_dut <= '0';
+                wait for clock_period *2;
+                assert out_line_dut = to_signed(test_register(I,2), data_width)
+                	report "Error: Output not as expected"
+                    severity failure;
+            end loop;
 
             -- end simulation
             assert false report "end of simulation" severity failure;
