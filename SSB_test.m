@@ -1,15 +1,16 @@
 %% Single-Sideband-Modulation
 
 %% Test Signal
-fs = 96e3; % Abtastfrequenz in Hz
+fs = 48e3; % Abtastfrequenz in Hz
 fc = 1000; % carrier frequency in Hz
 
-% t = 0:1/fs:.1-1/fs; % chirp
-t = 0:1/fs:.8008-1/fs; % maybe next time
+t = 0:1/fs:.1-1/fs; % chirp
+%t = 0:1/fs:.8008-1/fs; % maybe next time
 %t = 0:1/fs:4.5938-1/fs; % longer signal
 
-input = audioread("maybe-next-time.wav");
-x_test = round((2^15-1)*input); %maybe next time
+%input = audioread("maybe-next-time.wav");
+%x_test = round((2^15-1)*input); %maybe next time
+x_test = round((2^15-1)*sin(t*1000)); %sine input
 % x_test = round((2^15-1)*chirp(t,100,.1-1/fs,1000));  %input signal
 %x_test = fi(chirp(t,100,.1-1/fs,1000),1,16,15);  %input signal
 %x_test = round((2^15-1)*input_example); %longer example from emil
