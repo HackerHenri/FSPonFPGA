@@ -39,9 +39,15 @@ add wave -divider -height 32 ADD_MULT
 add wave -position 16  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/delayed_line
 add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/sin_line
 add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/cos_line
-add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/out_line
+#add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/out_line
 add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/filtered_line
-add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_idx
+add wave -position 23  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/Y
+add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/STATE_REGISTER
+add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/NEXT_STATE
+add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_IDX_SIN
+add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_IDX_COS
+#add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/OUT_BIG
+#add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_idx
 # display DAC path
 #add wave -divider -height 32 DAC_PATH
 #add wave -height 32 -radix decimal  sim:/audio_system_top_tb/DUT/AUDIO_PAR_OUT_R

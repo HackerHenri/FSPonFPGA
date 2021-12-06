@@ -63,7 +63,7 @@ DUT : AUDIO_SYSTEM_TOP
 	variable SPACE : character; -- read delimiter space
 	
     begin
-    file_open(FILE_AUDIO_IN,  "audio_input.txt",  read_mode);
+    file_open(FILE_AUDIO_IN,  "audio_input_nextTime.txt",  read_mode);
     file_open(FILE_AUDIO_OUT, "audio_output.txt", write_mode);
 	
 	wait until SRESETN='1'; -- start generating input after reset is gone

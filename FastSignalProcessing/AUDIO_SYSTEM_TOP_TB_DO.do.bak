@@ -30,7 +30,7 @@ add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/X_DEL
 # display FILTER line
 add wave -divider -height 32 FILTER
 add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_FIR_FILTER/XN
-add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_FIR_FILTER/YN
+#add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_FIR_FILTER/YN
 add wave -position 19  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_FIR_FILTER/COEFF
 add wave -position 20  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD
 add wave -position 21  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_FIR_FILTER/PROD
@@ -39,13 +39,19 @@ add wave -divider -height 32 ADD_MULT
 add wave -position 16  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/delayed_line
 add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/sin_line
 add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/cos_line
-add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/out_line
+#add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/out_line
 add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/filtered_line
-add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_idx
+add wave -position 23  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/Y
+add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/STATE_REGISTER
+add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/NEXT_STATE
+add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_IDX_SIN
+add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_IDX_COS
+#add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/OUT_BIG
+#add wave -position end  sim:/audio_system_top_tb/DUT/INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_idx
 # display DAC path
 #add wave -divider -height 32 DAC_PATH
 #add wave -height 32 -radix decimal  sim:/audio_system_top_tb/DUT/AUDIO_PAR_OUT_R
 #add wave -height 32 -radix default  sim:/audio_system_top_tb/DOUT
 
-run 100ms
+run 1ms
 

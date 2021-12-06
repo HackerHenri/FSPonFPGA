@@ -47,6 +47,8 @@ architecture SINGLE_LUT of ADD_MULT is
     constant ADD_STATE: natural := 2;
     constant RESET_STATE: natural := 3;
 
+
+    signal OUT_BIG: signed (50 downto 0);
     type test_array is array (natural range<>, natural range<>) of integer range 2**data_width-1 downto -(2**data_width);
     constant test_register: test_array := (
         -- Matches values from matlab arrays 'cos_mid', 'sin_mid'
@@ -63,7 +65,7 @@ architecture SINGLE_LUT of ADD_MULT is
         STATES: process(CLOCK)
         begin
             if rising_edge(CLOCK) then
-                if RESET = '1' then
+                if RESET = '0' then
                     STATE_REGISTER <= RESET_STATE;
                 elsif ENABLE = '1' then
                     STATE_REGISTER <= MULT_STATE;
@@ -96,9 +98,9 @@ architecture SINGLE_LUT of ADD_MULT is
                     NEXT_STATE <= ADD_STATE;
                 when ADD_STATE =>
                     -- Add two signals into one output
-                    SLICE_LINE <= std_logic_vector((COS_LINE(DATA_WIDTH-1) & COS_LINE) + (SIN_LINE(DATA_WIDTH-1) & SIN_LINE));
-                    OUT_LINE <= SLICE_LINE(24 downto 8); -- Rescale from 25-bit to 16-bit by slicing the std_logic_vector
-
+                    --OUT_LINE <= resize((COS_LINE(DATA_WIDTH-1) & COS_LINE) - (SIN_LINE(DATA_WIDTH-1) & SIN_LINE), DATA_WIDTH); -- resize 25-bit to 16-bit
+		    SLICE_LINE <= std_logic_vector((COS_LINE(DATA_WIDTH-1) & COS_LINE) + (SIN_LINE(DATA_WIDTH-1) & SIN_LINE));
+                    OUT_LINE <= SLICE_LINE(23 downto 8);
                     -- Increment or reset LUT_IDX
                     if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
                         LUT_IDX_SIN <= LUT_IDX_SIN + 1;
