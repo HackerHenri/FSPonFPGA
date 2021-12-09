@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.runs/synth_1/AUDIO_SYSTEM_TOP.tcl"
+  variable script "L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.runs/synth_1/AUDIO_SYSTEM_TOP.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,28 +70,31 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 2
+set_param checkpoint.writeSynthRtdsInDcp 1
+set_param chipscope.maxJobs 12
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-2L
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.cache/wt [current_project]
-set_property parent.project_path L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.xpr [current_project]
+set_property webtalk.parent_dir L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.cache/wt [current_project]
+set_property parent.project_path L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
-set_property ip_output_repo l:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.cache/ip [current_project]
+set_property ip_output_repo l:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
-  L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/AUDIO_CODEC_COM.vhd
-  L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd
-  L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/DELAY.vhd
-  L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/FIR_FILTER.vhd
-  L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/Modulator.vhd
-  L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd
+  L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/AUDIO_CODEC_COM.vhd
+  L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd
+  L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/DELAY.vhd
+  L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/FIR_FILTER.vhd
+  L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/Modulator.vhd
+  L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/sources_1/imports/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -102,11 +105,11 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_AUDIO_Conn_3.xdc
-set_property used_in_implementation false [get_files L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_AUDIO_Conn_3.xdc]
+read_xdc L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_AUDIO_Conn_3.xdc
+set_property used_in_implementation false [get_files L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_AUDIO_Conn_3.xdc]
 
-read_xdc L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_Main_System.xdc
-set_property used_in_implementation false [get_files L:/HAWCloud/SSPSynthesize/audio_synthesize/audio_synthesize.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_Main_System.xdc]
+read_xdc L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_Main_System.xdc
+set_property used_in_implementation false [get_files L:/HAWCloud/Vivado/audio_synthesize/audio_synthesize.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_Main_System.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
@@ -114,6 +117,9 @@ close [open __synthesis_is_running__ w]
 OPTRACE "synth_design" START { }
 synth_design -top AUDIO_SYSTEM_TOP -part xc7a100tcsg324-2L
 OPTRACE "synth_design" END { }
+if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
+ send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
+}
 
 
 OPTRACE "write_checkpoint" START { CHECKPOINT }
