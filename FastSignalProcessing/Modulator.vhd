@@ -35,20 +35,12 @@ architecture SINGLE_LUT of ADD_MULT is
           -64,  -56,  -49,  -41,  -33,  -25,  -17,   -8
     );
 
-    signal SIN_LINE, COS_LINE: signed ((DATA_WIDTH+SINE_WIDTH) downto 0); -- 25-bit to handle multiplication and addition
-    signal SLICE_LINE: std_logic_vector((DATA_WIDTH+SINE_WIDTH+1) downto 0);
+    signal SIN_LINE, COS_LINE: signed ((DATA_WIDTH+SINE_WIDTH) downto 0); -- 24-bit to handle multiplication
+    signal SLICE_LINE: std_logic_vector((DATA_WIDTH+SINE_WIDTH+1) downto 0); -- 25-bit to handle addition
     signal LUT_IDX_SIN: integer range 0 to SINE_SAMPLES-1 := 0;
     signal LUT_IDX_COS: integer range 0 to SINE_SAMPLES-1 := 24;
 
-    signal NEXT_STATE: natural range 0 to 3 := 0;
-    signal STATE_REGISTER: natural range 0 to 3 := 0;
-    constant IDLE_STATE: natural := 0;
-    constant MULT_STATE: natural := 1;
-    constant ADD_STATE: natural := 2;
-    constant RESET_STATE: natural := 3;
-
-
-    signal OUT_BIG: signed (50 downto 0);
+    -- For use with assert statements
     type test_array is array (natural range<>, natural range<>) of integer range 2**data_width-1 downto -(2**data_width);
     constant test_register: test_array := (
         -- Matches values from matlab arrays 'cos_mid', 'sin_mid'
@@ -59,67 +51,49 @@ architecture SINGLE_LUT of ADD_MULT is
         ( -6765, -1848) -- Matlab idx = 1733, LUT counter = 4
     );
 
-
-    begin
-        -- Process to reset when RESET='1' and initiate arithmetic when ENABLE='1'
-        STATES: process(CLOCK)
+    begin        
+        ARITHMETIC: process(CLOCK)
         begin
             if rising_edge(CLOCK) then
-                if RESET = '0' then
-                    STATE_REGISTER <= RESET_STATE;
-                elsif ENABLE = '1' then
-                    STATE_REGISTER <= MULT_STATE;
-                else
-                    STATE_REGISTER <= NEXT_STATE;
-                end if;
-            end if;
-        end process;
-
-        -- Process to handle arithmetic operations with state machine (triggered when ENABLE='1')
-        ALU: process (STATE_REGISTER)
-        begin
-            NEXT_STATE <= STATE_REGISTER;
-
-            case STATE_REGISTER is
-                when IDLE_STATE =>
-                    SIN_LINE <= (others=>'0');
-                    COS_LINE <= (others=>'0');
-                when MULT_STATE =>
-                    -- Multiply delayed_line with cos_array value
-                    COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
-                    -- Multiply filtered_line with sin_array value
-                    SIN_LINE <= -(FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8)); -- 24-bit
-                    -- assert COS_LINE = to_signed(test_register(LUT_IDX_SIN,0), (DATA_WIDTH+SINE_WIDTH))
-                    --     report "COS_LINE value not as expected"
-                    --     severity warning;
-                    -- assert SIN_LINE = to_signed(test_register(LUT_IDX_SIN,1), (DATA_WIDTH+SINE_WIDTH))
-                    --     report "SIN_LINE value not as expected"
-                    --     severity warning;
-                    NEXT_STATE <= ADD_STATE;
-                when ADD_STATE =>
-                    -- Add two signals into one output
-                    --OUT_LINE <= resize((COS_LINE(DATA_WIDTH-1) & COS_LINE) - (SIN_LINE(DATA_WIDTH-1) & SIN_LINE), DATA_WIDTH); -- resize 25-bit to 16-bit
-		    SLICE_LINE <= std_logic_vector((COS_LINE(DATA_WIDTH-1) & COS_LINE) + (SIN_LINE(DATA_WIDTH-1) & SIN_LINE));
-                    OUT_LINE <= SLICE_LINE(23 downto 8);
-                    -- Increment or reset LUT_IDX
-                    if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
-                        LUT_IDX_SIN <= LUT_IDX_SIN + 1;
-                        LUT_IDX_COS <= 0;
-                    elsif LUT_IDX_SIN = 95 then
-                        LUT_IDX_SIN <= 0;
-                        LUT_IDX_COS <= LUT_IDX_COS + 1;
-                    else
-                        LUT_IDX_SIN <= LUT_IDX_SIN + 1;
-                        LUT_IDX_COS <= LUT_IDX_COS + 1;
-                    end if;
-                    NEXT_STATE <= IDLE_STATE;
-                when RESET_STATE =>
+                if RESET = '0' then -- Active-low
                     LUT_IDX_SIN <= 0;
                     LUT_IDX_COS <= 24;
+                    SIN_LINE <= (others=>'0');
+                    COS_LINE <= (others=>'0');
                     OUT_LINE <= (others=>'0');
-                    NEXT_STATE <= IDLE_STATE;
-                when others =>
-                    NEXT_STATE <= IDLE_STATE;
-            end case;
+                else
+                    -- 1x CLOCK period: COS_LINE & SIN_LINE calculations
+                    -- 1x CLOCK period: SLICE_LINE calculations
+                    -- 1x CLOCK period: OUT_LINE calculations
+                    if ENABLE = '1' then
+                        -- Multiply delayed_line with cos_array value
+                        COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
+                        -- Multiply filtered_line with sin_array value
+                        SIN_LINE <= FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8); -- 24-bit
+                        -- assert COS_LINE = to_signed(test_register(LUT_IDX_SIN,0), (DATA_WIDTH+SINE_WIDTH))
+                        --     report "COS_LINE value not as expected"
+                        --     severity warning;
+                        -- assert SIN_LINE = to_signed(test_register(LUT_IDX_SIN,1), (DATA_WIDTH+SINE_WIDTH))
+                        --     report "SIN_LINE value not as expected"
+                        --     severity warning;
+
+                        -- Increment or reset LUT_IDX
+                        if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
+                            LUT_IDX_SIN <= LUT_IDX_SIN + 1;
+                            LUT_IDX_COS <= 0;
+                        elsif LUT_IDX_SIN = 95 then
+                            LUT_IDX_SIN <= 0;
+                            LUT_IDX_COS <= LUT_IDX_COS + 1;
+                        else
+                            LUT_IDX_SIN <= LUT_IDX_SIN + 1;
+                            LUT_IDX_COS <= LUT_IDX_COS + 1;
+                        end if;
+                    end if;
+                    
+                    -- Add two signals into one output
+                    SLICE_LINE <= std_logic_vector((COS_LINE(DATA_WIDTH-1) & COS_LINE) - (SIN_LINE(DATA_WIDTH-1) & SIN_LINE));
+                    OUT_LINE <= SLICE_LINE(23 downto 8);
+                end if;
+            end if;
         end process;
 end architecture;
