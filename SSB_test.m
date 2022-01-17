@@ -10,8 +10,8 @@ t = 0:1/fs:.1-1/fs; % chirp
 
 %input = audioread("maybe-next-time.wav");
 %x_test = round((2^15-1)*input); %maybe next time
-x_test = round((2^15-1)*sin(t*1000)); %sine input
-% x_test = round((2^15-1)*chirp(t,100,.1-1/fs,1000));  %input signal
+%x_test = round((2^15-1)*sin(t*1000)); %sine input
+x_test = round((2^15-1)*chirp(t,100,.1-1/fs,1000));  %input signal chirp
 %x_test = fi(chirp(t,100,.1-1/fs,1000),1,16,15);  %input signal
 %x_test = round((2^15-1)*input_example); %longer example from emil
 
@@ -91,13 +91,36 @@ y=y./(2^23);
 % Power Spectrum
 figure;
 periodogram(y, [], 4096, fs, 'power', 'centered');
-title('Periodogramm des modulierten Signals (mit Cosinus-Array)');
+title('Periodogramm of the modulated signal');
 ylim([-200 0]);
 xlim([-6 6]);
 
+figure;
+periodogram(x_test./2^15-1, [], 4096, fs, 'power', 'centered');
+title('Periodogramm of the input signal');
+ylim([-200 0]);
+xlim([-6 6]);
 % Spectrogramm
 figure;
 spectrogram(y, hamming(512), [], [], fs, 'yaxis'); 
-title('Spektrogramm des modulierten Signals (mit Cosinus-Array)');
+title('Spectrogram of the modulated signal');
 ax = gca;
 ax.YLim = [0 3];
+
+figure;
+spectrogram(x_test./2^15-1, hamming(512), [], [], fs, 'yaxis'); 
+title('Spectrogram of the input signal');
+ax = gca;
+ax.YLim = [0 3];
+
+figure;
+plot(t,x_test./2^15);
+title('Chirp signal');
+xlabel('Time [s]');
+ylabel('Amplitude');
+
+figure;
+plot(t,y);
+title('Chirp signal modulated');
+xlabel('Time [s]');
+ylabel('Amplitude');
