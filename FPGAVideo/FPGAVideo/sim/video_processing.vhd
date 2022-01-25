@@ -47,7 +47,7 @@ architecture RTL of VIDEO_PROCESSING is
 	constant X_START : natural := (X_VISIBLE/(2*STEP_WIDTH))*STEP_WIDTH;  -- start x coord of square
 	constant Y_START : natural := (Y_VISIBLE/(2*STEP_WIDTH))*STEP_WIDTH;  -- start y coord of square 
 	
-	constant SIZE_CONST : integer := 1008; -- Size constant for the scaling of the square
+	constant SIZE_CONST : integer := 600; -- Size constant for the scaling of the square
 
 -- spiral demo signals ---------------------------------
 -- registers
@@ -157,8 +157,7 @@ begin
 				stateNext <= draw;
 			end if;
 		when updateSize =>
-			currSizeNext <= to_integer(signed(audio_sample) * SIZE_CONST);
-			report "size of audio" & integer'image(currSizeNext) severity failure;
+			currSizeNext <= to_integer(signed(audio_sample)) * SIZE_CONST / (2**15);
 			stateNext <= updatePos;
 		when updatePos =>	
 			xSquareNext <= (X_VISIBLE - size) - (X_VISIBLE - size)/2;

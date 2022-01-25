@@ -1,0 +1,7 @@
+Mon Jan 24 15:27:51 CET 2022
+Trace back: invalid command name "SrcCommon::LoadDBSDialog"
+    while executing
+"SrcCommon::LoadDBSDialog"
+    ("after" script)
+  <2:C:/modeltech64_2021.2/win64/tk8.6/bgerror.tcl:106: ::tkerror {invalid command name "SrcCommon::LoadDBSDialog"}
+  <1:proc:6: ::tk::dialog::error::bgerror {invalid command name "SrcCommon::LoadDBSDialog"}
