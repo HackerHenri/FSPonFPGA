@@ -1,0 +1,582 @@
+
+*** Running vivado
+    with args -log AUDIO_SYSTEM_TOP.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source AUDIO_SYSTEM_TOP.tcl
+
+
+
+****** Vivado v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+  **** IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source AUDIO_SYSTEM_TOP.tcl -notrace
+Command: synth_design -top AUDIO_SYSTEM_TOP -part xc7a100tcsg324-2L
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-2L
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 9312
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1083.121 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'AUDIO_SYSTEM_TOP' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd:23]
+	Parameter W bound to: 16 - type: integer 
+	Parameter W bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'AUDIO_CODEC_COM' declared at 'L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_CODEC_COM.vhd:10' bound to instance 'INST_AUDIO_CODEC_COM' of component 'AUDIO_CODEC_COM' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd:59]
+INFO: [Synth 8-638] synthesizing module 'AUDIO_CODEC_COM' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_CODEC_COM.vhd:30]
+	Parameter W bound to: 16 - type: integer 
+	Parameter M bound to: 3 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'AUDIO_CODEC_COM' (1#1) [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_CODEC_COM.vhd:30]
+	Parameter W bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'AUDIO_PROCESSING' declared at 'L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd:10' bound to instance 'INST_AUDIO_PROCESSING' of component 'AUDIO_PROCESSING' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd:62]
+INFO: [Synth 8-638] synthesizing module 'AUDIO_PROCESSING' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd:22]
+	Parameter W bound to: 16 - type: integer 
+	Parameter W bound to: 16 - type: integer 
+	Parameter DELAY_N bound to: 64 - type: integer 
+INFO: [Synth 8-3491] module 'DELAY' declared at 'L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/DELAY.vhd:10' bound to instance 'INST_DELAY' of component 'DELAY' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd:70]
+INFO: [Synth 8-638] synthesizing module 'DELAY' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/DELAY.vhd:23]
+	Parameter W bound to: 16 - type: integer 
+	Parameter DELAY_N bound to: 64 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'DELAY' (2#1) [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/DELAY.vhd:23]
+	Parameter XN_WIDTH bound to: 16 - type: integer 
+	Parameter YN_WIDTH bound to: 16 - type: integer 
+	Parameter COEFF_WIDTH bound to: 16 - type: integer 
+	Parameter PROD_WIDTH bound to: 32 - type: integer 
+	Parameter TAPS bound to: 129 - type: integer 
+INFO: [Synth 8-3491] module 'FIR_FILTER' declared at 'L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/FIR_FILTER.vhd:6' bound to instance 'INST_FIR_FILTER' of component 'FIR_FILTER' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd:72]
+INFO: [Synth 8-638] synthesizing module 'FIR_FILTER' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/FIR_FILTER.vhd:23]
+	Parameter XN_WIDTH bound to: 16 - type: integer 
+	Parameter YN_WIDTH bound to: 16 - type: integer 
+	Parameter COEFF_WIDTH bound to: 16 - type: integer 
+	Parameter PROD_WIDTH bound to: 32 - type: integer 
+	Parameter TAPS bound to: 129 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'FIR_FILTER' (3#1) [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/FIR_FILTER.vhd:23]
+	Parameter data_width bound to: 16 - type: integer 
+INFO: [Synth 8-3491] module 'ADD_MULT' declared at 'L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/Modulator.vhd:5' bound to instance 'INST_ADD_MULT' of component 'ADD_MULT' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd:74]
+INFO: [Synth 8-638] synthesizing module 'ADD_MULT' [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/Modulator.vhd:17]
+	Parameter DATA_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'ADD_MULT' (4#1) [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/Modulator.vhd:17]
+INFO: [Synth 8-256] done synthesizing module 'AUDIO_PROCESSING' (5#1) [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_PROCESSING_DUMMY.vhd:22]
+INFO: [Synth 8-256] done synthesizing module 'AUDIO_SYSTEM_TOP' (6#1) [L:/audio_synthesize2/audio_synthesize2.srcs/sources_1/imports/FastSignalProcessing/AUDIO_SYSTEM_TOP.vhd:23]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1104.164 ; gain = 21.043
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 1104.164 ; gain = 21.043
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 1104.164 ; gain = 21.043
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.040 . Memory (MB): peak = 1104.164 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [L:/audio_synthesize2/audio_synthesize2.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_AUDIO_Conn_3.xdc]
+Finished Parsing XDC File [L:/audio_synthesize2/audio_synthesize2.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_AUDIO_Conn_3.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [L:/audio_synthesize2/audio_synthesize2.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_AUDIO_Conn_3.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/AUDIO_SYSTEM_TOP_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/AUDIO_SYSTEM_TOP_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [L:/audio_synthesize2/audio_synthesize2.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_Main_System.xdc]
+Finished Parsing XDC File [L:/audio_synthesize2/audio_synthesize2.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_Main_System.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [L:/audio_synthesize2/audio_synthesize2.srcs/constrs_1/imports/ConstraintsFilesXDC/Modsys_Artix7_Main_System.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/AUDIO_SYSTEM_TOP_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/AUDIO_SYSTEM_TOP_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1221.699 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.041 . Memory (MB): peak = 1221.699 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1221.699 ; gain = 138.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-2L
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1221.699 ; gain = 138.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1221.699 ; gain = 138.578
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-6040] Register LUT_IDX_SIN_reg_rep driving address of a ROM cannot be packed in BRAM/URAM because of presence of initial value.
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1221.699 ; gain = 138.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   16 Bit       Adders := 65    
+	   2 Input   11 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 2     
++---Registers : 
+	               24 Bit    Registers := 1     
+	               16 Bit    Registers := 196   
+	               11 Bit    Registers := 1     
+	                7 Bit    Registers := 4     
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 2     
+	   3 Input    7 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 2     
+	   4 Input    7 Bit        Muxes := 1     
+	   3 Input    5 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 4     
+	   5 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-6040] Register INST_AUDIO_PROCESSING/INST_ADD_MULT/LUT_IDX_SIN_reg_rep driving address of a ROM cannot be packed in BRAM/URAM because of presence of initial value.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/COS_LINE_reg, operation Mode is: (A''*B)'.
+DSP Report: register INST_AUDIO_PROCESSING/INST_DELAY/SR_reg[62] is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/COS_LINE_reg.
+DSP Report: register INST_AUDIO_PROCESSING/INST_DELAY/SR_reg[63] is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/COS_LINE_reg.
+DSP Report: register INST_AUDIO_PROCESSING/INST_ADD_MULT/COS_LINE_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/COS_LINE_reg.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_ADD_MULT/COS_LINE0 is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/COS_LINE_reg.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[1]1, operation Mode is: A2*(B:0x3ffcc).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[1]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[1]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[1]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[3]1, operation Mode is: A2*(B:0x3ffe2).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[3]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[3]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[3]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[5]1, operation Mode is: A2*(B:0x3ffda).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[5]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[5]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[5]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[7]1, operation Mode is: A2*(B:0x3ffd0).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[7]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[7]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[7]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[9]1, operation Mode is: A2*(B:0x3ffc5).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[9]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[9]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[9]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[11]1, operation Mode is: A2*(B:0x3ffb7).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[11]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[11]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[11]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[13]1, operation Mode is: A2*(B:0x3ffa8).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[13]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[13]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[13]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[15]1, operation Mode is: A2*(B:0x3ff97).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[15]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[15]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[15]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[17]1, operation Mode is: A2*(B:0x3ff84).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[17]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[17]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[17]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[19]1, operation Mode is: A2*(B:0x3ff6d).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[19]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[19]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[19]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[21]1, operation Mode is: A2*(B:0x3ff54).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[21]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[21]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[21]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[23]1, operation Mode is: A2*(B:0x3ff38).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[23]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[23]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[23]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[25]1, operation Mode is: A2*(B:0x3ff18).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[25]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[25]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[25]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[27]1, operation Mode is: A2*(B:0x3fef5).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[27]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[27]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[27]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[29]1, operation Mode is: A2*(B:0x3fecd).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[29]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[29]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[29]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[31]1, operation Mode is: A2*(B:0x3fea0).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[31]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[31]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[31]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[33]1, operation Mode is: A2*(B:0x3fe6d).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[33]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[33]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[33]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[35]1, operation Mode is: A2*(B:0x3fe33).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[35]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[35]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[35]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[37]1, operation Mode is: A2*(B:0x3fdf2).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[37]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[37]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[37]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[39]1, operation Mode is: A2*(B:0x3fda7).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[39]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[39]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[39]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[41]1, operation Mode is: A2*(B:0x3fd50).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[41]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[41]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[41]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[43]1, operation Mode is: A2*(B:0x3fcea).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[43]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[43]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[43]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[45]1, operation Mode is: A2*(B:0x3fc71).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[45]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[45]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[45]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[47]1, operation Mode is: A2*(B:0x3fbdf).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[47]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[47]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[47]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[49]1, operation Mode is: A2*(B:0x3fb29).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[49]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[49]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[49]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[51]1, operation Mode is: A2*(B:0x3fa40).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[51]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[51]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[51]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[53]1, operation Mode is: A2*(B:0x3f909).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[53]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[53]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[53]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[55]1, operation Mode is: A2*(B:0x3f750).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[55]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[55]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[55]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[57]1, operation Mode is: A2*(B:0x3f4a5).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[57]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[57]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[57]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[59]1, operation Mode is: A2*(B:0x3efe9).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[59]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[59]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[59]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[61]1, operation Mode is: A2*(B:0x3e4f6).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[61]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[61]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[61]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[63]1, operation Mode is: A2*(B:0x3ae8e).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[63]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[63]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[63]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[65]1, operation Mode is: A2*(B:0x5172).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[65]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[65]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[65]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[67]1, operation Mode is: A2*(B:0x1b0a).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[67]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[67]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[67]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[69]1, operation Mode is: A2*(B:0x1017).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[69]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[69]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[69]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[71]1, operation Mode is: A2*(B:0xb5b).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[71]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[71]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[71]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[73]1, operation Mode is: A2*(B:0x8b0).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[73]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[73]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[73]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[75]1, operation Mode is: A2*(B:0x6f7).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[75]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[75]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[75]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[77]1, operation Mode is: A2*(B:0x5c0).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[77]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[77]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[77]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[79]1, operation Mode is: A2*(B:0x4d7).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[79]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[79]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[79]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[81]1, operation Mode is: A2*(B:0x421).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[81]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[81]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[81]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[83]1, operation Mode is: A2*(B:0x38f).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[83]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[83]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[83]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[85]1, operation Mode is: A2*(B:0x316).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[85]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[85]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[85]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[87]1, operation Mode is: A2*(B:0x2b0).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[87]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[87]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[87]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[89]1, operation Mode is: A2*(B:0x259).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[89]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[89]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[89]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[91]1, operation Mode is: A2*(B:0x20e).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[91]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[91]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[91]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[93]1, operation Mode is: A2*(B:0x1cd).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[93]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[93]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[93]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[95]1, operation Mode is: A2*(B:0x193).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[95]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[95]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[95]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[97]1, operation Mode is: A2*(B:0x160).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[97]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[97]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[97]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[99]1, operation Mode is: A2*(B:0x133).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[99]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[99]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[99]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[101]1, operation Mode is: A2*(B:0x10b).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[101]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[101]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[101]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[103]1, operation Mode is: A2*(B:0xe8).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[103]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[103]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[103]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[105]1, operation Mode is: A2*(B:0xc8).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[105]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[105]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[105]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[107]1, operation Mode is: A2*(B:0xac).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[107]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[107]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[107]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[109]1, operation Mode is: A2*(B:0x93).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[109]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[109]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[109]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[111]1, operation Mode is: A2*(B:0x7c).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[111]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[111]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[111]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[113]1, operation Mode is: A2*(B:0x69).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[113]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[113]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[113]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[115]1, operation Mode is: A2*(B:0x58).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[115]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[115]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[115]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[117]1, operation Mode is: A2*(B:0x49).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[117]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[117]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[117]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[119]1, operation Mode is: A2*(B:0x3b).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[119]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[119]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[119]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[121]1, operation Mode is: A2*(B:0x30).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[121]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[121]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[121]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[123]1, operation Mode is: A2*(B:0x26).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[123]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[123]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[123]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[125]1, operation Mode is: A2*(B:0x1e).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[125]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[125]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[125]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[127]1, operation Mode is: A2*(B:0x34).
+DSP Report: register INST_AUDIO_CODEC_COM/SHIFT_IN_REG_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[127]1.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[127]1 is absorbed into DSP INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[127]1.
+DSP Report: Generating DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/SLICE_LINE_reg, operation Mode is: (PCIN-(A2*B)')'.
+DSP Report: register INST_AUDIO_PROCESSING/INST_FIR_FILTER/ADD_reg[0] is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/SLICE_LINE_reg.
+DSP Report: register INST_AUDIO_PROCESSING/INST_ADD_MULT/SLICE_LINE_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/SLICE_LINE_reg.
+DSP Report: register INST_AUDIO_PROCESSING/INST_ADD_MULT/SIN_LINE_reg is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/SLICE_LINE_reg.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_ADD_MULT/SLICE_LINE0 is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/SLICE_LINE_reg.
+DSP Report: operator INST_AUDIO_PROCESSING/INST_ADD_MULT/SIN_LINE0 is absorbed into DSP INST_AUDIO_PROCESSING/INST_ADD_MULT/SLICE_LINE_reg.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:26 . Memory (MB): peak = 1221.699 ; gain = 138.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping	Report
++-----------------+------------+---------------+----------------+
+|Module Name      | RTL Object | Depth x Width | Implemented As | 
++-----------------+------------+---------------+----------------+
+|ADD_MULT         | p_0_out    | 128x8         | LUT            | 
+|ADD_MULT         | p_0_out    | 128x8         | LUT            | 
+|AUDIO_SYSTEM_TOP | p_0_out    | 128x8         | LUT            | 
+|AUDIO_SYSTEM_TOP | p_0_out    | 128x8         | LUT            | 
++-----------------+------------+---------------+----------------+
+
+
+DSP: Preliminary Mapping	Report (see note below)
++-----------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name      | DSP Mapping     | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-----------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|AUDIO_SYSTEM_TOP | (A''*B)'        | 16     | 8      | -      | -      | 24     | 2    | 0    | -    | -    | -     | 1    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ffcc)  | 16     | 7      | -      | -      | 23     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ffe2)  | 16     | 6      | -      | -      | 22     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ffda)  | 16     | 7      | -      | -      | 23     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ffd0)  | 16     | 7      | -      | -      | 23     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ffc5)  | 16     | 7      | -      | -      | 23     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ffb7)  | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ffa8)  | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ff97)  | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ff84)  | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ff6d)  | 16     | 9      | -      | -      | 25     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ff54)  | 16     | 9      | -      | -      | 25     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ff38)  | 16     | 9      | -      | -      | 25     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ff18)  | 16     | 9      | -      | -      | 25     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fef5)  | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fecd)  | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fea0)  | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fe6d)  | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fe33)  | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fdf2)  | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fda7)  | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fd50)  | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fcea)  | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fc71)  | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fbdf)  | 16     | 12     | -      | -      | 28     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fb29)  | 16     | 12     | -      | -      | 28     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3fa40)  | 16     | 12     | -      | -      | 28     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3f909)  | 16     | 12     | -      | -      | 28     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3f750)  | 16     | 13     | -      | -      | 29     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3f4a5)  | 16     | 13     | -      | -      | 29     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3efe9)  | 16     | 14     | -      | -      | 30     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3e4f6)  | 16     | 14     | -      | -      | 30     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3ae8e)  | 16     | 16     | -      | -      | 32     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x5172)   | 16     | 16     | -      | -      | 32     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x1b0a)   | 16     | 14     | -      | -      | 30     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x1017)   | 16     | 14     | -      | -      | 30     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0xb5b)    | 16     | 13     | -      | -      | 29     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x8b0)    | 16     | 13     | -      | -      | 29     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x6f7)    | 16     | 12     | -      | -      | 28     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x5c0)    | 16     | 12     | -      | -      | 28     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x4d7)    | 16     | 12     | -      | -      | 28     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x421)    | 16     | 12     | -      | -      | 28     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x38f)    | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x316)    | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x2b0)    | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x259)    | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x20e)    | 16     | 11     | -      | -      | 27     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x1cd)    | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x193)    | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x160)    | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x133)    | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x10b)    | 16     | 10     | -      | -      | 26     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0xe8)     | 16     | 9      | -      | -      | 25     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0xc8)     | 16     | 9      | -      | -      | 25     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0xac)     | 16     | 9      | -      | -      | 25     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x93)     | 16     | 9      | -      | -      | 25     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x7c)     | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x69)     | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x58)     | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x49)     | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x3b)     | 16     | 7      | -      | -      | 23     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x30)     | 16     | 7      | -      | -      | 23     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x26)     | 16     | 7      | -      | -      | 23     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x1e)     | 16     | 6      | -      | -      | 22     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | A2*(B:0x34)     | 16     | 7      | -      | -      | 23     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|AUDIO_SYSTEM_TOP | (PCIN-(A2*B)')' | 16     | 8      | -      | -      | 24     | 1    | 0    | -    | -    | -     | 1    | 1    | 
++-----------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:37 . Memory (MB): peak = 1252.547 ; gain = 169.426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:39 . Memory (MB): peak = 1277.266 ; gain = 194.145
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:37 ; elapsed = 00:00:42 . Memory (MB): peak = 1307.848 ; gain = 224.727
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:41 ; elapsed = 00:00:46 . Memory (MB): peak = 1308.176 ; gain = 225.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:41 ; elapsed = 00:00:46 . Memory (MB): peak = 1308.176 ; gain = 225.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:43 ; elapsed = 00:00:48 . Memory (MB): peak = 1308.176 ; gain = 225.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:43 ; elapsed = 00:00:48 . Memory (MB): peak = 1308.176 ; gain = 225.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:43 ; elapsed = 00:00:48 . Memory (MB): peak = 1308.176 ; gain = 225.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:43 ; elapsed = 00:00:48 . Memory (MB): peak = 1308.176 ; gain = 225.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++-----------------+-------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name      | RTL Name                                        | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++-----------------+-------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|AUDIO_SYSTEM_TOP | INST_AUDIO_PROCESSING/INST_DELAY/SR_reg[61][15] | 62     | 16    | YES          | NO                 | YES               | 0      | 32      | 
++-----------------+-------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     1|
+|2     |CARRY4  |   262|
+|3     |DSP48E1 |    66|
+|6     |LUT1    |    93|
+|7     |LUT2    |  1019|
+|8     |LUT3    |     9|
+|9     |LUT4    |    19|
+|10    |LUT5    |    11|
+|11    |LUT6    |    38|
+|12    |MUXF7   |    16|
+|13    |SRLC32E |    32|
+|14    |FDRE    |  2219|
+|15    |FDSE    |     4|
+|16    |IBUF    |     3|
+|17    |OBUF    |     4|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:43 ; elapsed = 00:00:48 . Memory (MB): peak = 1308.176 ; gain = 225.055
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:34 ; elapsed = 00:00:46 . Memory (MB): peak = 1308.176 ; gain = 107.520
+Synthesis Optimization Complete : Time (s): cpu = 00:00:43 ; elapsed = 00:00:49 . Memory (MB): peak = 1308.176 ; gain = 225.055
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.059 . Memory (MB): peak = 1308.176 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 344 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'AUDIO_SYSTEM_TOP' is not ideal for floorplanning, since the cellview 'FIR_FILTER' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1308.176 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+33 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:49 ; elapsed = 00:01:05 . Memory (MB): peak = 1308.176 ; gain = 225.055
+INFO: [Common 17-1381] The checkpoint 'L:/audio_synthesize2/audio_synthesize2.runs/synth_1/AUDIO_SYSTEM_TOP.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file AUDIO_SYSTEM_TOP_utilization_synth.rpt -pb AUDIO_SYSTEM_TOP_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Dec 13 12:43:37 2021...
