@@ -58,22 +58,21 @@ component ADD_MULT is
         filtered_line: in signed(data_width-1 downto 0);
         delayed_line: in signed(data_width-1 downto 0);
         out_line: out std_logic_vector(data_width-1 downto 0);
-	ENABLE: in std_logic;
+		ENABLE: in std_logic;
         clock: in std_logic;
         reset: in std_logic;
-	SWITCH: in std_logic_vector(1 downto 0)
+		SWITCH: in std_logic_vector(1 downto 0)
         );
 end component ADD_MULT;
 	
 signal X_DELAYED, X_TILDE : signed(W-1 downto 0);
 signal Y: std_logic_vector(W-1 downto 0);
 begin
-
-INST_DELAY : DELAY
-	port map(CLK,SRESETN,ENABLE,AUDIO_IN,X_DELAYED);
-INST_FIR_FILTER : FIR_FILTER
-	port map(CLK,SRESETN,ENABLE,AUDIO_IN,X_TILDE);
-INST_ADD_MULT : ADD_MULT
-	port map(X_TILDE,X_DELAYED,Y,ENABLE,CLK,SRESETN,SWITCH);
-AUDIO_OUT <= Y;
+	INST_DELAY : DELAY
+		port map(CLK,SRESETN,ENABLE,AUDIO_IN,X_DELAYED);
+	INST_FIR_FILTER : FIR_FILTER
+		port map(CLK,SRESETN,ENABLE,AUDIO_IN,X_TILDE);
+	INST_ADD_MULT : ADD_MULT
+		port map(X_TILDE,X_DELAYED,Y,ENABLE,CLK,SRESETN,SWITCH);
+	AUDIO_OUT <= Y;
 end Components;

@@ -11,13 +11,10 @@ entity AUDIO_SYSTEM_TOP is
 	generic(W : integer := 16);
 	port(
 		CLK, SRESETN : in std_logic;
-		-- clock signals (to audio codec)
-		SYSCLK, BCK, LRC: out std_logic;
-		-- serial data in
-		DIN: in std_logic;
-		-- serial data out
-		DOUT: out std_logic;
-		IOM_IN: in std_logic_vector(1 downto 0)
+		SYSCLK, BCK, LRC: out std_logic; 		-- clock signals (to audio codec)
+		DIN: in std_logic; 						-- serial data in
+		DOUT: out std_logic; 					-- serial data out
+		IOM_IN: in std_logic_vector(1 downto 0) -- switch (4 possible values)
 		);
 end AUDIO_SYSTEM_TOP;
 
@@ -56,16 +53,11 @@ end component AUDIO_PROCESSING;
 
 signal AUDIO_PAR_IN_L, AUDIO_PAR_IN_R, AUDIO_PAR_OUT_L, AUDIO_PAR_OUT_R : std_logic_vector(W-1 downto 0);
 signal START_L, START_R : std_logic;
---signal SWITCH_COMBINE : std_logic_vector(1 downto 0);
-
 
 begin
---SWITCH_COMBINE <= SWITCH_ONE & SWITCH_TWO;
---SWITCH_COMBINE <= "01";
-INST_AUDIO_CODEC_COM : AUDIO_CODEC_COM
-	port map (CLK,SRESETN,SYSCLK,BCK,LRC,DIN,AUDIO_PAR_IN_L,AUDIO_PAR_IN_R,START_L,START_R,AUDIO_PAR_OUT_R,AUDIO_PAR_OUT_R,DOUT);
+	INST_AUDIO_CODEC_COM : AUDIO_CODEC_COM
+		port map (CLK,SRESETN,SYSCLK,BCK,LRC,DIN,AUDIO_PAR_IN_L,AUDIO_PAR_IN_R,START_L,START_R,AUDIO_PAR_OUT_R,AUDIO_PAR_OUT_R,DOUT);
 
-INST_AUDIO_PROCESSING : AUDIO_PROCESSING 
-    port map (CLK,SRESETN,START_R,AUDIO_PAR_IN_R,IOM_IN,AUDIO_PAR_OUT_R);
-		
+	INST_AUDIO_PROCESSING : AUDIO_PROCESSING 
+		port map (CLK,SRESETN,START_R,AUDIO_PAR_IN_R,IOM_IN,AUDIO_PAR_OUT_R);	
 end COMPONENTS;

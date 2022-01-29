@@ -11,7 +11,7 @@ entity ADD_MULT is
         ENABLE: in std_logic;
         CLOCK: in std_logic;
         RESET: in std_logic;
-	SWITCH: in std_logic_vector(1 downto 0)
+    	SWITCH: in std_logic_vector(1 downto 0)
         );
 end entity;
     
@@ -41,6 +41,7 @@ architecture SINGLE_LUT of ADD_MULT is
     signal LUT_IDX_SIN: integer range 0 to SINE_SAMPLES-1 := 0;
     signal LUT_IDX_COS: integer range 0 to SINE_SAMPLES-1 := 24;
     signal SWITCHES: std_logic_vector(1 downto 0);
+
     -- For use with assert statements
     type test_array is array (natural range<>, natural range<>) of integer range 2**data_width-1 downto -(2**data_width);
     constant test_register: test_array := (
@@ -67,36 +68,36 @@ architecture SINGLE_LUT of ADD_MULT is
                     -- 1x CLOCK period: SLICE_LINE calculations
                     -- 1x CLOCK period: OUT_LINE calculations
                     if ENABLE = '1' then
-			if SWITCH = "00" then
-                        -- Multiply delayed_line with cos_array value
-                        COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
-                        -- Multiply filtered_line with sin_array value
-                        SIN_LINE <= FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8); -- 24-bit
-                        -- assert COS_LINE = to_signed(test_register(LUT_IDX_SIN,0), (DATA_WIDTH+SINE_WIDTH))
-                        --     report "COS_LINE value not as expected"
-                        --     severity warning;
-                        -- assert SIN_LINE = to_signed(test_register(LUT_IDX_SIN,1), (DATA_WIDTH+SINE_WIDTH))
-                        --     report "SIN_LINE value not as expected"
-                        --     severity warning;
+            			if SWITCH = "00" then
+                            -- Multiply delayed_line with cos_array value
+                            COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
+                            -- Multiply filtered_line with sin_array value
+                            SIN_LINE <= FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8); -- 24-bit
+                            -- assert COS_LINE = to_signed(test_register(LUT_IDX_SIN,0), (DATA_WIDTH+SINE_WIDTH))
+                            --     report "COS_LINE value not as expected"
+                            --     severity warning;
+                            -- assert SIN_LINE = to_signed(test_register(LUT_IDX_SIN,1), (DATA_WIDTH+SINE_WIDTH))
+                            --     report "SIN_LINE value not as expected"
+                            --     severity warning;
 
-                        -- Increment or reset LUT_IDX
-                        if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
-                            LUT_IDX_SIN <= LUT_IDX_SIN + 1;
-                            LUT_IDX_COS <= 0;
-                        elsif LUT_IDX_SIN = 95 then
-                            LUT_IDX_SIN <= 0;
-                            LUT_IDX_COS <= LUT_IDX_COS + 1;
-                        else
-                            LUT_IDX_SIN <= LUT_IDX_SIN + 1;
-                            LUT_IDX_COS <= LUT_IDX_COS + 1;
-                        end if;
-			end if;
-                    end if;
+                            -- Increment or reset LUT_IDX
+                            if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
+                                LUT_IDX_SIN <= LUT_IDX_SIN + 1;
+                                LUT_IDX_COS <= 0;
+                            elsif LUT_IDX_SIN = 95 then
+                                LUT_IDX_SIN <= 0;
+                                LUT_IDX_COS <= LUT_IDX_COS + 1;
+                            else
+                                LUT_IDX_SIN <= LUT_IDX_SIN + 1;
+                                LUT_IDX_COS <= LUT_IDX_COS + 1;
+                            end if; -- if LUT_IDX_SIN
+			            end if; -- if SWITCH
+                    end if; -- if ENABLE
                     
                     -- Add two signals into one output
                     SLICE_LINE <= std_logic_vector((COS_LINE(DATA_WIDTH-1) & COS_LINE) - (SIN_LINE(DATA_WIDTH-1) & SIN_LINE));
                     OUT_LINE <= SLICE_LINE(23 downto 8);
-                end if;
-            end if;
+                end if; -- if RESET
+            end if; -- if rising edge
         end process;
 end architecture;
