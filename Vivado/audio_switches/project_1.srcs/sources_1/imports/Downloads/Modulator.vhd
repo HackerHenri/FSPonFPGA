@@ -40,18 +40,6 @@ architecture SINGLE_LUT of ADD_MULT is
     signal SLICE_LINE: std_logic_vector((DATA_WIDTH+SINE_WIDTH+1) downto 0); -- 25-bit to handle addition
     signal LUT_IDX_SIN: integer range 0 to SINE_SAMPLES-1 := 0;
     signal LUT_IDX_COS: integer range 0 to SINE_SAMPLES-1 := 24;
-    signal SWITCHES: std_logic_vector(1 downto 0);
-
-    -- For use with assert statements
-    type test_array is array (natural range<>, natural range<>) of integer range 2**data_width-1 downto -(2**data_width);
-    constant test_register: test_array := (
-        -- Matches values from matlab arrays 'cos_mid', 'sin_mid'
-        ( -8128,     0), -- Matlab idx = 1729, LUT counter = 0
-        ( -8509,  -400), -- Matlab idx = 1730, LUT counter = 1
-        (-10710,  -561), -- Matlab idx = 1731, LUT counter = 2
-        ( -6750,  -650), -- Matlab idx = 1732, LUT counter = 3
-        ( -6765, -1848) -- Matlab idx = 1733, LUT counter = 4
-    );
 
     begin        
         ARITHMETIC: process(CLOCK)
@@ -68,18 +56,36 @@ architecture SINGLE_LUT of ADD_MULT is
                     -- 1x CLOCK period: SLICE_LINE calculations
                     -- 1x CLOCK period: OUT_LINE calculations
                     if ENABLE = '1' then
-            			if SWITCH = "00" then
-                            -- Multiply delayed_line with cos_array value
-                            COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
-                            -- Multiply filtered_line with sin_array value
-                            SIN_LINE <= FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8); -- 24-bit
-                            -- assert COS_LINE = to_signed(test_register(LUT_IDX_SIN,0), (DATA_WIDTH+SINE_WIDTH))
-                            --     report "COS_LINE value not as expected"
-                            --     severity warning;
-                            -- assert SIN_LINE = to_signed(test_register(LUT_IDX_SIN,1), (DATA_WIDTH+SINE_WIDTH))
-                            --     report "SIN_LINE value not as expected"
-                            --     severity warning;
-
+                        -- Multiply delayed_line with cos_array value
+                        COS_LINE <= DELAYED_LINE * to_signed(SIN_ARRAY(LUT_IDX_COS), 8); -- 24-bit (from multiplying 16-bit and 8-bit signals)
+                        -- Multiply filtered_line with sin_array value
+                        SIN_LINE <= FILTERED_LINE * to_signed(SIN_ARRAY(LUT_IDX_SIN), 8); -- 24-bit
+            			
+                        if SWITCH = "01" then -- 2 kHz
+                            -- Increment or reset LUT_IDX
+                            if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
+                                LUT_IDX_SIN <= LUT_IDX_SIN + 2;
+                                LUT_IDX_COS <= 0;
+                            elsif LUT_IDX_SIN = 95 then
+                                LUT_IDX_SIN <= 0;
+                                LUT_IDX_COS <= LUT_IDX_COS + 2;
+                            else
+                                LUT_IDX_SIN <= LUT_IDX_SIN + 2;
+                                LUT_IDX_COS <= LUT_IDX_COS + 2;
+                            end if; -- if LUT_IDX_SIN
+                        elsif SWITCH = "10" then -- 3 kHz
+                            -- Increment or reset LUT_IDX
+                            if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
+                                LUT_IDX_SIN <= LUT_IDX_SIN + 3;
+                                LUT_IDX_COS <= 0;
+                            elsif LUT_IDX_SIN = 95 then
+                                LUT_IDX_SIN <= 0;
+                                LUT_IDX_COS <= LUT_IDX_COS + 3;
+                            else
+                                LUT_IDX_SIN <= LUT_IDX_SIN + 3;
+                                LUT_IDX_COS <= LUT_IDX_COS + 3;
+                            end if; -- if LUT_IDX_SIN
+                        else -- 1 kHz as default (SWITCH="00" or "11")
                             -- Increment or reset LUT_IDX
                             if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
                                 LUT_IDX_SIN <= LUT_IDX_SIN + 1;
