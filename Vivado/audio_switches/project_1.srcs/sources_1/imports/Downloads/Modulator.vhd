@@ -63,10 +63,10 @@ architecture SINGLE_LUT of ADD_MULT is
             			
                         if SWITCH = "01" then -- 2 kHz
                             -- Increment or reset LUT_IDX
-                            if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
+                            if LUT_IDX_SIN = 70 then
                                 LUT_IDX_SIN <= LUT_IDX_SIN + 2;
                                 LUT_IDX_COS <= 0;
-                            elsif LUT_IDX_SIN = 95 then
+                            elsif LUT_IDX_SIN = 94 then
                                 LUT_IDX_SIN <= 0;
                                 LUT_IDX_COS <= LUT_IDX_COS + 2;
                             else
@@ -75,10 +75,10 @@ architecture SINGLE_LUT of ADD_MULT is
                             end if; -- if LUT_IDX_SIN
                         elsif SWITCH = "10" then -- 3 kHz
                             -- Increment or reset LUT_IDX
-                            if LUT_IDX_SIN = 71 then -- LUT_IDX_COS = 95
+                            if LUT_IDX_SIN = 69 then
                                 LUT_IDX_SIN <= LUT_IDX_SIN + 3;
                                 LUT_IDX_COS <= 0;
-                            elsif LUT_IDX_SIN = 95 then
+                            elsif LUT_IDX_SIN = 93 then
                                 LUT_IDX_SIN <= 0;
                                 LUT_IDX_COS <= LUT_IDX_COS + 3;
                             else
